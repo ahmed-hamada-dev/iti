@@ -1,0 +1,173 @@
+export type SquirrelType = "red" | "gray" | "black" | "white" | "brown";
+
+export type Squirrel = {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  count: number;
+  type: SquirrelType;
+};
+
+export const squirrels: Squirrel[] = [
+  {
+    id: 1,
+    name: "Red Scurry",
+    image: "/images/red-squirrel.png",
+    description: "The red squirrel is a small, agile squirrel with a reddish-brown coat and a bushy tail.",
+    count: 10,
+    type: "red",
+  },
+  {
+    id: 2,
+    name: "Gray Nutty",
+    image: "/images/gray-squirrel.png",
+    description: "The gray squirrel is a medium-sized squirrel with a gray coat and a bushy tail.",
+    count: 20,
+    type: "gray",
+  },
+  {
+    id: 3,
+    name: "Black Shadow",
+    image: "/images/black-squirrel.png",
+    description: "The black squirrel is a small, agile squirrel with a black coat and a bushy tail.",
+    count: 30,
+    type: "black",
+  },
+  {
+    id: 4,
+    name: "White Ghost",
+    image: "/images/white-squirrel.png",
+    description: "The white squirrel is a small, agile squirrel with a white coat and a bushy tail.",
+    count: 4,
+    type: "white",
+  },
+  {
+    id: 5,
+    name: "Brown Acorn",
+    image: "/images/brown-squirrel.png",
+    description: "The brown squirrel is a small, agile squirrel with a brown coat and a bushy tail.",
+    count: 2,
+    type: "brown",
+  },
+  {
+    id: 6,
+    name: "Rusty Tail",
+    image: "/images/red-squirrel.png",
+    description: "A very active red squirrel known for its long, bushy tail.",
+    count: 15,
+    type: "red",
+  },
+  {
+    id: 7,
+    name: "Mistie",
+    image: "/images/gray-squirrel.png",
+    description: "A calm gray squirrel that loves to hang out near the park bench.",
+    count: 12,
+    type: "gray",
+  },
+  {
+    id: 8,
+    name: "Midnight",
+    image: "/images/black-squirrel.png",
+    description: "A dark black squirrel that is hard to spot at dusk.",
+    count: 8,
+    type: "black",
+  },
+  {
+    id: 9,
+    name: "Snowball",
+    image: "/images/white-squirrel.png",
+    description: "A rare white squirrel seen only during the winter months.",
+    count: 3,
+    type: "white",
+  },
+  {
+    id: 10,
+    name: "Chestnut",
+    image: "/images/brown-squirrel.png",
+    description: "A friendly brown squirrel usually found near the oak trees.",
+    count: 25,
+    type: "brown",
+  },
+  {
+    id: 11,
+    name: "Ginger",
+    image: "/images/red-squirrel.png",
+    description: "Named for its distinct reddish hue and energetic personality.",
+    count: 5,
+    type: "red",
+  },
+  {
+    id: 12,
+    name: "Silver",
+    image: "/images/gray-squirrel.png",
+    description: "A sleek gray squirrel with a shimmering coat.",
+    count: 18,
+    type: "gray",
+  },
+  {
+    id: 13,
+    name: "Inky",
+    image: "/images/black-squirrel.png",
+    description: "A black squirrel that loves hiding in the shadows.",
+    count: 14,
+    type: "black",
+  },
+  {
+    id: 14,
+    name: "Pearl",
+    image: "/images/white-squirrel.png",
+    description: "A graceful white squirrel that stands out in the garden.",
+    count: 1,
+    type: "white",
+  },
+  {
+    id: 15,
+    name: "Coco",
+    image: "/images/brown-squirrel.png",
+    description: "A chocolate-brown squirrel that is quite brave around humans.",
+    count: 22,
+    type: "brown",
+  },
+  {
+    id: 16,
+    name: "Flame",
+    image: "/images/red-squirrel.png",
+    description: "A fiery red squirrel that can outrun almost anything.",
+    count: 9,
+    type: "red",
+  },
+  {
+    id: 17,
+    name: "Ash",
+    image: "/images/gray-squirrel.png",
+    description: "A light gray squirrel with a very thick coat.",
+    count: 11,
+    type: "gray",
+  },
+  {
+    id: 18,
+    name: "Coal",
+    image: "/images/black-squirrel.png",
+    description: "A solid black squirrel that is extremely fast.",
+    count: 6,
+    type: "black",
+  },
+  {
+    id: 19,
+    name: "Ivory",
+    image: "/images/white-squirrel.png",
+    description: "A majestic white squirrel known for its white fluff.",
+    count: 2,
+    type: "white",
+  },
+  {
+    id: 20,
+    name: "Hazel",
+    image: "/images/brown-squirrel.png",
+    description: "A warm brown squirrel that has a stash of hazelnuts.",
+    count: 30,
+    type: "brown",
+  },
+];
