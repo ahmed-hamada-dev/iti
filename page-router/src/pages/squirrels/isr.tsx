@@ -1,3 +1,4 @@
+
 import { GetStaticProps } from "next";
 import { Squirrel } from "@/lib/squirrels";
 import { getSquirrels } from "@/lib/api";
