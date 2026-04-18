@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { squirrels as initialSquirrels } from "../../lib/squirrels";
 import SquirrelCard from "./SquirrelCard";
 import {
   ControlledSquirrelForm,
@@ -8,35 +7,28 @@ import {
 import { Button } from "../ui/button";
 import { UncontrolledSquirrelForm } from "./UncontrolledSquirrelForm";
 import { SquirrelFormDialog } from "./SquirrelDialogs";
+import { useSquirrels } from "../../hooks/SquirrelContext";
+import { useSquirrelFilter, SquirrelFilterSelect } from "./SquirrelFilter";
 
 export default function SquirrelList() {
-  const [squirrelsState, setSquirrelsState] = useState(initialSquirrels);
+  const { squirrels, handleAdd, handleUpdate, handleDelete } = useSquirrels();
   const [showControlledAdd, setShowControlledAdd] = useState(false);
   const [showUncontrolledAdd, setShowUncontrolledAdd] = useState(false);
+  const { filterValue: typeFilter, setFilterValue: setTypeFilter } = useSquirrelFilter();
 
-  const handleAdd = (data: SquirrelFormData) => {
-    const newId =
-      squirrelsState.length > 0
-        ? Math.max(...squirrelsState.map((s) => s.id)) + 1
-        : 1;
-    setSquirrelsState([...squirrelsState, { ...data, id: newId }]);
+  const onSubmitAdd = (data: SquirrelFormData) => {
+    handleAdd(data);
     setShowControlledAdd(false);
     setShowUncontrolledAdd(false);
   };
 
-  const handleUpdate = (id: number, data: SquirrelFormData) => {
-    setSquirrelsState(
-      squirrelsState.map((sq) => (sq.id === id ? { ...sq, ...data } : sq)),
-    );
-  };
-
-  const handleDelete = (id: number) => {
-    setSquirrelsState(squirrelsState.filter((sq) => sq.id !== id));
-  };
+  const filteredSquirrels = squirrels.filter(
+    (squirrel) => typeFilter === "all" || squirrel.type === typeFilter
+  );
 
   return (
     <section className="w-full px-4 md:px-8  py-16">
-      {" "}
+     
       <header className="mb-12">
         <div className="flex flex-col md:flex-row w-full items-center justify-between gap-6">
           <div className="text-center md:text-left">
@@ -49,6 +41,8 @@ export default function SquirrelList() {
             </p>
           </div>
           <div className="flex flex-wrap shrink-0 justify-center gap-4 mt-6 md:mt-0">
+            <SquirrelFilterSelect value={typeFilter} onChange={setTypeFilter} />
+            
             <Button
               size="lg"
               className="rounded-xl font-bold shadow-md hover:shadow-lg active:scale-95 transition-all"
@@ -68,7 +62,7 @@ export default function SquirrelList() {
         </div>
       </header>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
-        {squirrelsState.map((squirrel) => (
+        {filteredSquirrels.map((squirrel) => (
           <SquirrelCard
             key={squirrel.id}
             squirrel={squirrel}
@@ -84,7 +78,7 @@ export default function SquirrelList() {
         title="Add New Squirrel (Controlled Form)"
       >
         <ControlledSquirrelForm
-          onSubmit={handleAdd}
+          onSubmit={onSubmitAdd}
           onCancel={() => setShowControlledAdd(false)}
           submitLabel="Add Squirrel"
         />
@@ -96,7 +90,7 @@ export default function SquirrelList() {
         title="Add New Squirrel (Uncontrolled Form)"
       >
         <UncontrolledSquirrelForm
-          onSubmit={handleAdd}
+          onSubmit={onSubmitAdd}
           onCancel={() => setShowUncontrolledAdd(false)}
         />
       </SquirrelFormDialog>

@@ -36,6 +36,10 @@ export default function SquirrelCard({
   const [count, setCount] = useState(squirrel.count);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const maxLength = 20;
+  const needsExpansion = squirrel.description.length > maxLength;
 
   const handleFeed = () => {
     if (count > 0) {
@@ -108,7 +112,17 @@ export default function SquirrelCard({
 
         <CardContent className="flex flex-col grow pb-6">
           <CardDescription className="text-secondary-foreground/80 text-sm leading-relaxed mb-6 pt-1 grow">
-            {squirrel.description}
+            {isExpanded || !needsExpansion
+              ? squirrel.description
+              : `${squirrel.description.slice(0, maxLength)}...`}
+            {needsExpansion && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-primary font-semibold hover:underline bg-transparent border-none p-0 ml-1 cursor-pointer"
+              >
+                {isExpanded ? "Show less" : "Show more"}
+              </button>
+            )}
           </CardDescription>
 
           <div className="flex items-center justify-between p-4 bg-muted rounded-xl mt-auto">
