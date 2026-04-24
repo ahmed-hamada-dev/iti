@@ -1,34 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SquirrelCard from "./SquirrelCard";
 import {
   ControlledSquirrelForm,
   type SquirrelFormData,
 } from "./ControlledSquirrelForm";
 import { Button } from "../ui/button";
-import { UncontrolledSquirrelForm } from "./UncontrolledSquirrelForm";
 import { SquirrelFormDialog } from "./SquirrelDialogs";
 import { useSquirrels } from "../../hooks/SquirrelContext";
 import { useSquirrelFilter, SquirrelFilterSelect } from "./SquirrelFilter";
 
 export default function SquirrelList() {
-  const { squirrels, handleAdd, handleUpdate, handleDelete } = useSquirrels();
-  const [showControlledAdd, setShowControlledAdd] = useState(false);
-  const [showUncontrolledAdd, setShowUncontrolledAdd] = useState(false);
+  const { squirrels, loading, error, loadSquirrels, handleAdd, handleUpdate, handleDelete } = useSquirrels();
+  const [showAddDialog, setShowAddDialog] = useState(false);
   const { filterValue: typeFilter, setFilterValue: setTypeFilter } = useSquirrelFilter();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      loadSquirrels(searchTerm, typeFilter);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, typeFilter, loadSquirrels]);
 
   const onSubmitAdd = (data: SquirrelFormData) => {
     handleAdd(data);
-    setShowControlledAdd(false);
-    setShowUncontrolledAdd(false);
+    setShowAddDialog(false);
   };
 
-  const filteredSquirrels = squirrels.filter(
-    (squirrel) => typeFilter === "all" || squirrel.type === typeFilter
-  );
-
   return (
-    <section className="w-full px-4 md:px-8  py-16">
-     
+    <section className="w-full px-4 md:px-8 py-16">
       <header className="mb-12">
         <div className="flex flex-col md:flex-row w-full items-center justify-between gap-6">
           <div className="text-center md:text-left">
@@ -41,57 +42,58 @@ export default function SquirrelList() {
             </p>
           </div>
           <div className="flex flex-wrap shrink-0 justify-center gap-4 mt-6 md:mt-0">
+            <input
+              type="text"
+              placeholder="Search squirrels..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="px-4 py-2 border rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:outline-hidden focus:ring-2 focus:ring-emerald-500"
+            />
             <SquirrelFilterSelect value={typeFilter} onChange={setTypeFilter} />
             
             <Button
               size="lg"
               className="rounded-xl font-bold shadow-md hover:shadow-lg active:scale-95 transition-all"
-              onClick={() => setShowControlledAdd(true)}
+              onClick={() => setShowAddDialog(true)}
             >
-              Add (Controlled)
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-xl font-bold shadow-sm active:scale-95 transition-all"
-              onClick={() => setShowUncontrolledAdd(true)}
-            >
-              Add (Uncontrolled)
+              Add Squirrel
             </Button>
           </div>
         </div>
       </header>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
-        {filteredSquirrels.map((squirrel) => (
-          <SquirrelCard
-            key={squirrel.id}
-            squirrel={squirrel}
-            onUpdate={handleUpdate}
-            onDelete={handleDelete}
-          />
-        ))}
-      </div>
-      {/* Add Dialog (Controlled) */}
+      
+      {error && <div className="text-red-500 mb-8 font-bold">{error}</div>}
+      
+      {loading ? (
+        <div className="text-center text-lg text-emerald-600 animate-pulse">Loading squirrels...</div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
+          {squirrels.map((squirrel) => (
+            <SquirrelCard
+              key={squirrel.id}
+              squirrel={squirrel}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+          {squirrels.length === 0 && !loading && !error && (
+            <div className="col-span-full text-center text-slate-500 py-12">
+              No squirrels found. Try adjusting your search or filter.
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Add Dialog */}
       <SquirrelFormDialog
-        open={showControlledAdd}
-        onOpenChange={setShowControlledAdd}
-        title="Add New Squirrel (Controlled Form)"
+        open={showAddDialog}
+        onOpenChange={setShowAddDialog}
+        title="Add New Squirrel"
       >
         <ControlledSquirrelForm
           onSubmit={onSubmitAdd}
-          onCancel={() => setShowControlledAdd(false)}
+          onCancel={() => setShowAddDialog(false)}
           submitLabel="Add Squirrel"
-        />
-      </SquirrelFormDialog>
-      {/* Add Dialog (Uncontrolled) */}
-      <SquirrelFormDialog
-        open={showUncontrolledAdd}
-        onOpenChange={setShowUncontrolledAdd}
-        title="Add New Squirrel (Uncontrolled Form)"
-      >
-        <UncontrolledSquirrelForm
-          onSubmit={onSubmitAdd}
-          onCancel={() => setShowUncontrolledAdd(false)}
         />
       </SquirrelFormDialog>
     </section>

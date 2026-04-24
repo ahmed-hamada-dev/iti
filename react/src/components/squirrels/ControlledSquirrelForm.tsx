@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import type { SquirrelType } from "../../lib/squirrels";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-export type SquirrelFormData = {
-  name: string;
-  image: string;
-  description: string;
-  count: number;
-  type: SquirrelType;
-};
+const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(50, "Name is too long"),
+  image: z.string(),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  count: z.number().int("Count must be an integer").min(0, "Stock cannot be negative"),
+  type: z.enum(["red", "gray", "black", "white", "brown"]),
+});
+
+export type SquirrelFormData = z.infer<typeof formSchema>;
 
 interface ControlledFormProps {
   initialData?: SquirrelFormData;
@@ -25,93 +42,120 @@ export function ControlledSquirrelForm({
   onCancel,
   submitLabel = "Save",
 }: ControlledFormProps) {
-  const [formData, setFormData] = useState<SquirrelFormData>({
-    name: initialData?.name || "",
-    image: initialData?.image || "",
-    description: initialData?.description || "",
-    count: initialData?.count ?? 0,
-    type: initialData?.type || "brown",
+  const form = useForm<SquirrelFormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: initialData?.name || "",
+      image: initialData?.image || "",
+      description: initialData?.description || "",
+      count: initialData?.count ?? 0,
+      type: initialData?.type || "brown",
+    },
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "count" ? parseInt(value) || 0 : value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name) formData.name = "Unknown Squirrel";
-    if (!formData.image) formData.image = "/images/brown-squirrel.png";
-    onSubmit(formData);
+  const onSubmitForm = (data: SquirrelFormData) => {
+    if (!data.image || data.image.trim() === "") {
+      data.image = "/images/brown-squirrel.png";
+    }
+    onSubmit(data);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid py-4 gap-6">
-      <div className="grid gap-2">
-        <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="grid py-4 gap-6">
+        <FormField
+          control={form.control}
           name="name"
-          value={formData.name}
-          onChange={handleChange}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="image">Image URL</Label>
-        <Input
-          id="image"
+
+        <FormField
+          control={form.control}
           name="image"
-          value={formData.image}
-          onChange={handleChange}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="/images/brown-squirrel.png" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="description">Description</Label>
-        <Input
-          id="description"
+
+        <FormField
+          control={form.control}
           name="description"
-          value={formData.description}
-          onChange={handleChange}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="type">Type</Label>
-        <select
-          id="type"
+
+        <FormField
+          control={form.control}
           name="type"
-          value={formData.type}
-          onChange={handleChange}
-          className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <option value="red" className="bg-background text-foreground">Red</option>
-          <option value="gray" className="bg-background text-foreground">Gray</option>
-          <option value="black" className="bg-background text-foreground">Black</option>
-          <option value="white" className="bg-background text-foreground">White</option>
-          <option value="brown" className="bg-background text-foreground">Brown</option>
-        </select>
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="count">Stock Count</Label>
-        <Input
-          id="count"
-          name="count"
-          type="number"
-          min="0"
-          value={formData.count}
-          onChange={handleChange}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Type</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a squirrel type" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="red">Red</SelectItem>
+                  <SelectItem value="gray">Gray</SelectItem>
+                  <SelectItem value="black">Black</SelectItem>
+                  <SelectItem value="white">White</SelectItem>
+                  <SelectItem value="brown">Brown</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className="flex justify-end gap-3 pt-6 border-t border-border mt-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button type="submit">{submitLabel}</Button>
-      </div>
-    </form>
+
+        <FormField
+          control={form.control}
+          name="count"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Stock Count</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min="0"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value === "" ? 0 : e.target.valueAsNumber)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex justify-end gap-3 pt-6 border-t border-border mt-4">
+          <Button type="button" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button type="submit">{submitLabel}</Button>
+        </div>
+      </form>
+    </Form>
   );
 }

@@ -10,6 +10,9 @@ import tailwindcss from "@tailwindcss/vite";
 const config = defineConfig({
   server: {
     allowedHosts: ["sensitivity-danny-circus-affordable.trycloudflare.com"],
+    watch: {
+      ignored: ["**/db.json"],
+    },
   },
   plugins: [
     devtools(),

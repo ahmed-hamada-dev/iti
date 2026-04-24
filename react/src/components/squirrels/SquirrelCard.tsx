@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import type { Squirrel } from "../../lib/squirrels";
 import { Edit, Trash, MoreVertical } from "lucide-react";
 import { Button } from "../ui/button";
@@ -43,7 +44,15 @@ export default function SquirrelCard({
 
   const handleFeed = () => {
     if (count > 0) {
-      setCount((c) => c - 1);
+      const newCount = count - 1;
+      setCount(newCount);
+      onUpdate(squirrel.id, {
+        name: squirrel.name,
+        image: squirrel.image,
+        description: squirrel.description,
+        type: squirrel.type,
+        count: newCount,
+      });
     }
   };
 
@@ -93,20 +102,24 @@ export default function SquirrelCard({
         </div>
 
         <div className="w-full h-60 relative shrink-0">
-          <img
-            src={squirrel.image}
-            alt={squirrel.name}
-            className="w-full h-full object-cover "
-            loading="lazy"
-          />
-          <span className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-wider uppercase border border-white/30 shadow-sm">
+          <Link to="/squirrels/$id" params={{ id: squirrel.id.toString() }}>
+            <img
+              src={squirrel.image}
+              alt={squirrel.name}
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              loading="lazy"
+            />
+          </Link>
+          <span className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-wider uppercase border border-white/30 shadow-sm pointer-events-none">
             {squirrel.type}
           </span>
         </div>
 
         <CardHeader className="pt-6 pb-2">
-          <CardTitle className="font-[Montserrat] font-bold text-2xl">
-            {squirrel.name}
+          <CardTitle className="font-[Montserrat] font-bold text-2xl hover:text-emerald-600 transition-colors">
+            <Link to="/squirrels/$id" params={{ id: squirrel.id.toString() }}>
+              {squirrel.name}
+            </Link>
           </CardTitle>
         </CardHeader>
 

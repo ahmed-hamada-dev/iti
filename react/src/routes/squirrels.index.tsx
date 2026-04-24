@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import SquirrelList from "../components/squirrels/SquirrelList";
+import SquirrelList from "#/components/squirrels/SquirrelList";
 
-export const Route = createFileRoute("/squirrels")({
+export const Route = createFileRoute("/squirrels/")({
   component: SquirrelsPage,
 });
 

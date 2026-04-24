@@ -9,15 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SquirrelsRouteImport } from './routes/squirrels'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SquirrelsIndexRouteImport } from './routes/squirrels.index'
+import { Route as SquirrelsIdRouteImport } from './routes/squirrels.$id'
 
-const SquirrelsRoute = SquirrelsRouteImport.update({
-  id: '/squirrels',
-  path: '/squirrels',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -28,46 +24,53 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SquirrelsIndexRoute = SquirrelsIndexRouteImport.update({
+  id: '/squirrels/',
+  path: '/squirrels/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SquirrelsIdRoute = SquirrelsIdRouteImport.update({
+  id: '/squirrels/$id',
+  path: '/squirrels/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/squirrels': typeof SquirrelsRoute
+  '/squirrels/$id': typeof SquirrelsIdRoute
+  '/squirrels/': typeof SquirrelsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/squirrels': typeof SquirrelsRoute
+  '/squirrels/$id': typeof SquirrelsIdRoute
+  '/squirrels': typeof SquirrelsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/squirrels': typeof SquirrelsRoute
+  '/squirrels/$id': typeof SquirrelsIdRoute
+  '/squirrels/': typeof SquirrelsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/squirrels'
+  fullPaths: '/' | '/about' | '/squirrels/$id' | '/squirrels/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/squirrels'
-  id: '__root__' | '/' | '/about' | '/squirrels'
+  to: '/' | '/about' | '/squirrels/$id' | '/squirrels'
+  id: '__root__' | '/' | '/about' | '/squirrels/$id' | '/squirrels/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  SquirrelsRoute: typeof SquirrelsRoute
+  SquirrelsIdRoute: typeof SquirrelsIdRoute
+  SquirrelsIndexRoute: typeof SquirrelsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/squirrels': {
-      id: '/squirrels'
-      path: '/squirrels'
-      fullPath: '/squirrels'
-      preLoaderRoute: typeof SquirrelsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -82,13 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/squirrels/': {
+      id: '/squirrels/'
+      path: '/squirrels'
+      fullPath: '/squirrels/'
+      preLoaderRoute: typeof SquirrelsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/squirrels/$id': {
+      id: '/squirrels/$id'
+      path: '/squirrels/$id'
+      fullPath: '/squirrels/$id'
+      preLoaderRoute: typeof SquirrelsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  SquirrelsRoute: SquirrelsRoute,
+  SquirrelsIdRoute: SquirrelsIdRoute,
+  SquirrelsIndexRoute: SquirrelsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

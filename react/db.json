@@ -1,0 +1,28 @@
+{
+  "squirrels": [
+    {
+      "id": 1,
+      "name": "Red Squirrel",
+      "image": "/images/red-squirrel.png",
+      "description": "The red squirrel is a small, agile squirrel with a reddish-brown coat and a bushy tail.",
+      "count": 10,
+      "type": "red"
+    },
+    {
+      "id": 2,
+      "name": "Gray Squirrel",
+      "image": "/images/gray-squirrel.png",
+      "description": "The gray squirrel is a medium-sized squirrel with a gray coat and a bushy tail.",
+      "count": 20,
+      "type": "gray"
+    },
+    {
+      "id": 5,
+      "name": "Brown Squirre",
+      "image": "/images/brown-squirrel.png",
+      "description": "The brown squirrel is a small, agile squirrel with a brown coat and a bushy tail.",
+      "count": 2,
+      "type": "brown"
+    }
+  ]
+}
