@@ -4,27 +4,29 @@ import {
   ControlledSquirrelForm,
   type SquirrelFormData,
 } from "./ControlledSquirrelForm";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { SquirrelFormDialog } from "./SquirrelDialogs";
-import { useSquirrels } from "../../hooks/SquirrelContext";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchSquirrels, addSquirrel, updateSquirrel, deleteSquirrel } from "../store/squirrelsSlice";
 import { useSquirrelFilter, SquirrelFilterSelect } from "./SquirrelFilter";
 
 export default function SquirrelList() {
-  const { squirrels, loading, error, loadSquirrels, handleAdd, handleUpdate, handleDelete } = useSquirrels();
+  const dispatch = useAppDispatch();
+  const { squirrels, loading, error } = useAppSelector((state) => state.squirrels);
   const [showAddDialog, setShowAddDialog] = useState(false);
   const { filterValue: typeFilter, setFilterValue: setTypeFilter } = useSquirrelFilter();
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      loadSquirrels(searchTerm, typeFilter);
+      dispatch(fetchSquirrels({ search: searchTerm, type: typeFilter === "all" ? undefined : typeFilter }));
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, typeFilter, loadSquirrels]);
+  }, [searchTerm, typeFilter, dispatch]);
 
   const onSubmitAdd = (data: SquirrelFormData) => {
-    handleAdd(data);
+    dispatch(addSquirrel(data));
     setShowAddDialog(false);
   };
 
@@ -72,8 +74,8 @@ export default function SquirrelList() {
             <SquirrelCard
               key={squirrel.id}
               squirrel={squirrel}
-              onUpdate={handleUpdate}
-              onDelete={handleDelete}
+              onUpdate={(id, data) => dispatch(updateSquirrel({ id, data }))}
+              onDelete={(id) => dispatch(deleteSquirrel(id))}
             />
           ))}
           {squirrels.length === 0 && !loading && !error && (

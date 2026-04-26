@@ -23,6 +23,14 @@
       "description": "The brown squirrel is a small, agile squirrel with a brown coat and a bushy tail.",
       "count": 2,
       "type": "brown"
+    },
+    {
+      "name": "test",
+      "image": "/images/brown-squirrel.png",
+      "description": "fgds rewr r",
+      "count": 0,
+      "type": "brown",
+      "id": 7
     }
   ]
 }

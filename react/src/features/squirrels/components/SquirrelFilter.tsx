@@ -1,5 +1,5 @@
-import { type SquirrelType } from "../../lib/squirrels";
-import { useFilter, FilterSelect, type FilterOption } from "../../hooks/useFilter";
+import { type SquirrelType } from "../types";
+import { useFilter, FilterSelect, type FilterOption } from "@/hooks/useFilter";
 
 export type SquirrelTypeFilter = SquirrelType | "all";
 

@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { getSquirrel } from '#/lib/api'
-import type { Squirrel } from '#/lib/squirrels'
-import { Button } from '#/components/ui/button'
+import { getSquirrel } from '@/features/squirrels/api/squirrelsApi'
+import type { Squirrel } from '@/features/squirrels/types'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/squirrels/$id')({
   component: SquirrelDetailsPage,

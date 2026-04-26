@@ -1,6 +1,6 @@
 import axios from "axios";
-import type { Squirrel } from "./squirrels";
-import type { SquirrelFormData } from "../components/squirrels/ControlledSquirrelForm";
+import type { Squirrel } from "../types";
+import type { SquirrelFormData } from "../components/ControlledSquirrelForm";
 
 const API_URL = "http://localhost:5000/squirrels";
 

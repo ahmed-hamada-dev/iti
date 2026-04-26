@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import type { Squirrel } from "../../lib/squirrels";
+import type { Squirrel } from "../types";
 import { Edit, Trash, MoreVertical } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { SquirrelDeleteDialog, SquirrelFormDialog } from "./SquirrelDialogs";
 import {
   Card,
@@ -17,7 +17,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   ControlledSquirrelForm,
   type SquirrelFormData,
