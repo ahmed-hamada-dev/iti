@@ -1,4 +1,4 @@
-import styles from "./about.module.css";
+import { Card, Typography, Box, Paper } from '@mui/material';
 
 export default function AboutPage() {
   const sections = [
@@ -17,33 +17,45 @@ export default function AboutPage() {
   ];
 
   return (
-    <section className={styles.about}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className="fade-in">Why Squirrels <span>Matter</span></h1>
-          <p className={styles.subtitle + " fade-in"}>
+    <Box sx={{ py: 10, bgcolor: 'background.default' }}>
+      <Box sx={{ maxWidth: 1200, mx: 'auto', px: 3, width: '100%' }}>
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Typography variant="h3" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+            Why Squirrels Matter
+          </Typography>
+          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 700, mx: 'auto' }}>
             Beyond their playful antics, squirrels are foundational to many of the world's most critical ecosystems.
-          </p>
-        </div>
+          </Typography>
+        </Box>
 
-        <div className={styles.grid}>
+        <Box sx={{ mb: 8, display: 'flex', flexDirection: 'row', gap: 4 }}>
           {sections.map((section, index) => (
-            <div key={index} className={styles.card + " fade-in"}>
-              <h3>{section.title}</h3>
-              <p>{section.content}</p>
-            </div>
+            <Box key={index} sx={{ width: '33.333%' }}>
+              <Card sx={{ height: '100%', borderRadius: 4, transition: '0.3s', '&:hover': { transform: 'scale(1.02)', borderColor: 'primary.main' }, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
+                <Box sx={{ p: 4 }}>
+                  <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
+                    {section.title}
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    {section.content}
+                  </Typography>
+                </Box>
+              </Card>
+            </Box>
           ))}
-        </div>
+        </Box>
 
-        <div className={styles.contentHero + " fade-in"}>
-          <h2>Protecting Our Smallest Allies</h2>
-          <p>
+        <Paper elevation={0} sx={{ p: 8, bgcolor: 'action.hover', borderRadius: 8, textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
+          <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+            Protecting Our Smallest Allies
+          </Typography>
+          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', mt: 2 }}>
             As urbanization continues to expand, protecting squirrel habitats is more important than ever. 
             By maintaining green spaces and old-growth trees, we ensure these brilliant creatures continue 
             their vital work for generations to come.
-          </p>
-        </div>
-      </div>
-    </section>
+          </Typography>
+        </Paper>
+      </Box>
+    </Box>
   );
 }
