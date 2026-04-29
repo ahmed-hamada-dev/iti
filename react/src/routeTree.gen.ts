@@ -9,17 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MaterialDay1RouteImport } from './routes/material-day1'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SquirrelsIndexRouteImport } from './routes/squirrels.index'
 import { Route as SquirrelsIdRouteImport } from './routes/squirrels.$id'
 
-const MaterialDay1Route = MaterialDay1RouteImport.update({
-  id: '/material-day1',
-  path: '/material-day1',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -44,14 +38,12 @@ const SquirrelsIdRoute = SquirrelsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/material-day1': typeof MaterialDay1Route
   '/squirrels/$id': typeof SquirrelsIdRoute
   '/squirrels/': typeof SquirrelsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/material-day1': typeof MaterialDay1Route
   '/squirrels/$id': typeof SquirrelsIdRoute
   '/squirrels': typeof SquirrelsIndexRoute
 }
@@ -59,46 +51,26 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/material-day1': typeof MaterialDay1Route
   '/squirrels/$id': typeof SquirrelsIdRoute
   '/squirrels/': typeof SquirrelsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/material-day1'
-    | '/squirrels/$id'
-    | '/squirrels/'
+  fullPaths: '/' | '/about' | '/squirrels/$id' | '/squirrels/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/material-day1' | '/squirrels/$id' | '/squirrels'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/material-day1'
-    | '/squirrels/$id'
-    | '/squirrels/'
+  to: '/' | '/about' | '/squirrels/$id' | '/squirrels'
+  id: '__root__' | '/' | '/about' | '/squirrels/$id' | '/squirrels/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  MaterialDay1Route: typeof MaterialDay1Route
   SquirrelsIdRoute: typeof SquirrelsIdRoute
   SquirrelsIndexRoute: typeof SquirrelsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/material-day1': {
-      id: '/material-day1'
-      path: '/material-day1'
-      fullPath: '/material-day1'
-      preLoaderRoute: typeof MaterialDay1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -133,7 +105,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  MaterialDay1Route: MaterialDay1Route,
   SquirrelsIdRoute: SquirrelsIdRoute,
   SquirrelsIndexRoute: SquirrelsIndexRoute,
 }

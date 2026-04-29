@@ -1,4 +1,4 @@
-import { Card, Typography, Box } from '@mui/material';
+import { Card, Typography, Box ,Grid} from '@mui/material';
 import ForestIcon from '@mui/icons-material/Forest';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import TerrainIcon from '@mui/icons-material/Terrain';
@@ -39,9 +39,9 @@ export default function Features() {
             More than just park dwellers, squirrels are sophisticated mammals with complex lives and critical forest roles.
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
+        <Grid container spacing={4}>
           {features.map((feature, index) => (
-            <Box key={index} sx={{ width: '25%' }}>
+            <Grid key={index} size={{ xs: 12, md: 6, lg: 3 }}>
               <Card sx={{ 
                 height: '100%', 
                 display: 'flex', 
@@ -65,9 +65,9 @@ export default function Features() {
                   </Typography>
                 </Box>
               </Card>
-            </Box>
+            </Grid>
           ))}
-        </Box>
+        </Grid>
       </Box>
     </Box>
   );

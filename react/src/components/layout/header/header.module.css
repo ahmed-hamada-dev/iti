@@ -67,3 +67,17 @@
 .active {
   color: var(--accent) !important;
 }
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

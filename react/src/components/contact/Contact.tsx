@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Card } from '@mui/material';
+import { Box, Typography, Button, Card,Grid } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -16,8 +16,8 @@ export default function Contact() {
             Have questions about squirrel conservation or want to join our mission? We'd love to hear from you.
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 6 }}>
-          <Box sx={{ width: '41.666%' }}>
+        <Grid container spacing={6}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <Box sx={{ mb: 4 }}>
               <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Contact Information
@@ -38,19 +38,19 @@ export default function Contact() {
               <LocationOnIcon color="primary" sx={{ mr: 2 }} />
               <Typography variant="body1">Egypt</Typography>
             </Box>
-          </Box>
-          <Box sx={{ width: '58.333%' }}>
+          </Grid>
+          <Grid size={{ xs: 12, md: 7 }}>
             <Card sx={{ borderRadius: 4, boxShadow: 3 }}>
               <Box sx={{ p: 4 }}>
                 <Box component="form" noValidate autoComplete="off" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                    <Box sx={{ width: '50%' }}>
+                  <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Box component="input" placeholder="First Name" sx={{ width: '100%', p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1, fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box' }} />
-                    </Box>
-                    <Box sx={{ width: '50%' }}>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Box component="input" placeholder="Last Name" sx={{ width: '100%', p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1, fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box' }} />
-                    </Box>
-                  </Box>
+                    </Grid>
+                  </Grid>
                   <Box component="input" type="email" placeholder="Email Address" sx={{ width: '100%', p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1, fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box' }} />
                   <Box component="textarea" placeholder="Message" rows={4} sx={{ width: '100%', p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1, fontFamily: 'inherit', fontSize: '1rem', boxSizing: 'border-box', resize: 'vertical' }} />
                   <Button variant="contained" size="large" endIcon={<SendIcon />} sx={{ mt: 2, py: 1.5, borderRadius: 2 }}>
@@ -59,8 +59,8 @@ export default function Contact() {
                 </Box>
               </Box>
             </Card>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );

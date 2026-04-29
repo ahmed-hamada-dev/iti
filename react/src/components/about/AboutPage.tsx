@@ -1,4 +1,4 @@
-import { Card, Typography, Box, Paper } from '@mui/material';
+import { Card, Typography, Box, Paper,Grid } from '@mui/material';
 
 export default function AboutPage() {
   const sections = [
@@ -19,6 +19,7 @@ export default function AboutPage() {
   return (
     <Box sx={{ py: 10, bgcolor: 'background.default' }}>
       <Box sx={{ maxWidth: 1200, mx: 'auto', px: 3, width: '100%' }}>
+        {/* Content  */}
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography variant="h3" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
             Why Squirrels Matter
@@ -28,9 +29,10 @@ export default function AboutPage() {
           </Typography>
         </Box>
 
-        <Box sx={{ mb: 8, display: 'flex', flexDirection: 'row', gap: 4 }}>
+{/* Cards */}
+        <Grid container spacing={4} sx={{ mb: 8 }}>
           {sections.map((section, index) => (
-            <Box key={index} sx={{ width: '33.333%' }}>
+            <Grid key={index} size={{ xs: 12, md: 6, lg: 4 }}>
               <Card sx={{ height: '100%', borderRadius: 4, transition: '0.3s', '&:hover': { transform: 'scale(1.02)', borderColor: 'primary.main' }, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
                 <Box sx={{ p: 4 }}>
                   <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
@@ -41,15 +43,16 @@ export default function AboutPage() {
                   </Typography>
                 </Box>
               </Card>
-            </Box>
+            </Grid>
           ))}
-        </Box>
+        </Grid>
 
-        <Paper elevation={0} sx={{ p: 8, bgcolor: 'action.hover', borderRadius: 8, textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
-          <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+{/* info card */}
+        <Paper elevation={0} sx={{ p: { xs: 4, md: 8 }, bgcolor: 'action.hover', borderRadius: { xs: 4, md: 8 }, textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
+          <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold', fontSize: { xs: '1.75rem', md: '2.125rem' } }}>
             Protecting Our Smallest Allies
           </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', mt: 2 }}>
+          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', mt: 2, fontSize: { xs: '1rem', md: '1.25rem' } }}>
             As urbanization continues to expand, protecting squirrel habitats is more important than ever. 
             By maintaining green spaces and old-growth trees, we ensure these brilliant creatures continue 
             their vital work for generations to come.
