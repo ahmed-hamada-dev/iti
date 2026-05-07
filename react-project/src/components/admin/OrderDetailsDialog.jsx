@@ -1,0 +1,68 @@
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import OrderStatusBadge from './OrderStatusBadge';
+import { Clock, Truck, CheckCircle, XCircle } from 'lucide-react';
+
+const OrderDetailsDialog = ({ open, onOpenChange, order, onStatusUpdate }) => {
+  if (!order) return null;
+
+  const statusIcons = {
+    'Pending': <Clock className="w-4 h-4" />,
+    'On way': <Truck className="w-4 h-4" />,
+    'Delivered': <CheckCircle className="w-4 h-4" />,
+    'Canceled': <XCircle className="w-4 h-4" />
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center justify-between">
+             <span>Order Details #{order.id}</span>
+             <OrderStatusBadge status={order.status} />
+          </DialogTitle>
+        </DialogHeader>
+        <div className="py-4 space-y-6">
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Items</h4>
+            {order.items.map((item, i) => (
+              <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 rounded bg-white border border-slate-200 flex items-center justify-center text-xs font-bold">
+                    {item.quantity}
+                  </span>
+                  <span className="font-medium text-slate-700">{item.name}</span>
+                </div>
+                <span className="font-bold text-slate-900">${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-between items-center py-4 border-t border-slate-100">
+            <span className="font-bold text-slate-900">Total Amount</span>
+            <span className="text-2xl font-black text-indigo-600">${Number(order.total).toFixed(2)}</span>
+          </div>
+
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Change Status</h4>
+            <div className="grid grid-cols-2 gap-2">
+              {['Pending', 'On way', 'Delivered', 'Canceled'].map(status => (
+                <Button 
+                  key={status}
+                  variant={order.status === status ? 'default' : 'outline'}
+                  className={`justify-start gap-2 h-11 ${order.status === status ? 'bg-slate-900' : ''}`}
+                  onClick={() => onStatusUpdate(order.id, status)}
+                >
+                  {statusIcons[status]}
+                  {status}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default OrderDetailsDialog;

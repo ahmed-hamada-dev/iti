@@ -1,0 +1,49 @@
+import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+const CategoryFormDialog = ({ open, onOpenChange, onSubmit, initialData }) => {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name);
+    } else {
+      setName('');
+    }
+  }, [initialData, open]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ name });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{initialData ? 'Edit Category' : 'Add New Category'}</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4 py-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-700">Category Name</label>
+            <Input 
+              placeholder="e.g. Space Suits"
+              value={name} 
+              onChange={e => setName(e.target.value)} 
+              required 
+            />
+          </div>
+          <DialogFooter>
+            <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white py-6 rounded-xl font-bold">
+               {initialData ? 'Update Category' : 'Create Category'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default CategoryFormDialog;
