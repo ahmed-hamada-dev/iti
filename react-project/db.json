@@ -169,7 +169,18 @@
       "password": "123456Aa@",
       "role": "User",
       "id": "kyr2TDs",
-      "cart": []
+      "cart": [
+        {
+          "id": "1",
+          "name": "Nebula Wireless Headphones",
+          "price": 199.99,
+          "category": "Electronics",
+          "description": "Immersive sound with active noise cancellation and 40-hour battery life.",
+          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60",
+          "stock": 15,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "orders": [

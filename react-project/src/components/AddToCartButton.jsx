@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { useCart } from '../hooks/useCart';
 import { useAuth } from '../hooks/useAuth';
@@ -13,13 +14,16 @@ export function AddToCartButton({
   const { addToCart, items } = useCart();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [isAdding, setIsAdding] = useState(false);
 
   if (!product) return null;
 
   const cartItem = items.find(item => item.id === product.id);
+  const isInCart = Boolean(cartItem);
   const isOutOfStock = product.stock === 0 || (cartItem && cartItem.quantity >= product.stock);
+  const buttonDisabled = isAdding || isInCart || isOutOfStock;
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -28,8 +32,15 @@ export function AddToCartButton({
       return;
     }
 
-    if (!isOutOfStock) {
-      addToCart(product);
+    if (buttonDisabled) {
+      return;
+    }
+
+    setIsAdding(true);
+    try {
+      await addToCart(product);
+    } finally {
+      setIsAdding(false);
     }
   };
 
@@ -39,17 +50,25 @@ export function AddToCartButton({
     icon: "text-slate-600 hover:text-indigo-600"
   };
 
+  const buttonText = isAdding
+    ? 'Adding...'
+    : isInCart
+      ? 'In Cart'
+      : isOutOfStock
+        ? 'Sold Out'
+        : 'Add to Cart';
+
   return (
     <button
       type="button"
       onClick={handleAddToCart}
-      disabled={isOutOfStock}
+      disabled={buttonDisabled}
       className={`${baseClass} ${variants[variant]} ${className}`}
     >
       <ShoppingCart className={`${variant === 'icon' ? 'w-6 h-6' : 'w-4 h-4'}`} />
       {showText && (
         <span className="ml-2">
-          {isOutOfStock ? (variant === 'icon' ? '' : 'Sold Out') : (variant === 'icon' ? '' : 'Add to Cart')}
+          {variant === 'icon' ? '' : buttonText}
         </span>
       )}
     </button>
