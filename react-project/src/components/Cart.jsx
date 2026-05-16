@@ -99,7 +99,7 @@ const Cart = () => {
                 {items.map((item) => (
                   <div key={item.id} className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 group">
                     <img src={item.image} alt={item.name} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
-                    <div className="flex-grow">
+                    <div className="grow">
                       <h4 className="font-bold text-slate-900 leading-tight">{item.name}</h4>
                       <p className="text-indigo-600 font-black text-sm">${item.price}</p>
 

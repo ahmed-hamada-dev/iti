@@ -3,6 +3,7 @@ import { useProducts } from '../hooks/useProducts';
 import { useCategories } from '../hooks/useCategories';
 import { ProductCard } from '../components/ProductCard';
 import Hero from '../components/home/Hero';
+import AdsBanner from '../components/ads/AdsBanner';
 import ProductFilter from '../components/home/ProductFilter';
 import { useDebounce } from '../hooks/useDebounce';
 
@@ -12,7 +13,7 @@ const Home = () => {
   const debouncedSearch = useDebounce(search, 500);
 
   const { data: categoriesData } = useCategories();
-  
+
   const filterCategories = [
     { value: '', label: 'All Products' },
     ...(categoriesData?.map(c => ({ value: c.name, label: c.name })) || [])
@@ -30,8 +31,9 @@ const Home = () => {
 
       <section className="py-24 px-6 relative z-20 bg-slate-50 -mt-20 rounded-t-[3rem]">
         <div className="max-w-7xl mx-auto space-y-12">
+          <AdsBanner />
 
-          <ProductFilter 
+          <ProductFilter
             search={search}
             onSearchChange={setSearch}
             category={category}
@@ -61,7 +63,7 @@ const Home = () => {
                 </button>
               </div>
             ) : (
-              <div 
+              <div
                 key={`${debouncedSearch}-${category}`}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in"
               >

@@ -19,17 +19,17 @@ export function ProductCard({
       <article className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-300 relative h-full flex flex-col hover:-translate-y-2 hover:shadow-2xl">
         {/* Image Area */}
         <div className="h-56 w-full bg-slate-100 overflow-hidden relative">
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg border border-white/20">
             <span className="text-indigo-600 font-black text-lg">${product.price}</span>
           </div>
         </div>
 
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-6 flex flex-col grow">
           <div className="mb-3">
             <span className="px-3 py-1 text-[10px] font-black uppercase tracking-widest bg-indigo-50 text-indigo-600 rounded-lg">
               {product.category}
@@ -40,14 +40,14 @@ export function ProductCard({
             {product.name}
           </h3>
 
-          <p className="text-slate-500 text-sm mb-6 line-clamp-2 flex-grow font-medium leading-relaxed">
+          <p className="text-slate-500 text-sm mb-6 line-clamp-2 grow font-medium leading-relaxed">
             {product.description}
           </p>
 
           <div className="flex items-center justify-end pt-5 border-t border-slate-100 mt-auto gap-4">
 
-            <AddToCartButton 
-              product={product} 
+            <AddToCartButton
+              product={product}
               className="px-4 py-2.5 rounded-xl text-sm"
               showText={true}
             />

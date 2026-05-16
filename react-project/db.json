@@ -70,6 +70,63 @@
       "name": "phones"
     }
   ],
+  "ads": [
+    {
+      "id": "1",
+      "title": "Upgrade Your Setup with Stellar Audio",
+      "description": "Save 20% on premium noise-cancelling headphones and experience richer sound in every track.",
+      "ctaText": "Shop the Drop",
+      "href": "https://example.com/stellar-audio",
+      "image": "https://i1-e.pinimg.com/1200x/e9/05/c5/e905c536c865d8b9c93d184aef1e45ec.jpg",
+      "badge": "Limited Time Offer",
+      "priority": 10,
+      "active": true
+    },
+    {
+      "id": "2",
+      "title": "Discover the Galaxy of Smart Gadgets",
+      "description": "Explore curated picks for your next productivity boost, from smart watches to gaming essentials.",
+      "ctaText": "See Deals",
+      "href": "https://example.com/galaxy-gear",
+      "image": "https://i.pinimg.com/736x/5d/61/5f/5d615fc82fd1c434eb23e88854727e71.jpg",
+      "badge": "Sponsored",
+      "priority": 8,
+      "active": true
+    },
+    {
+      "id": "3",
+      "title": "Level Up Your Workspace",
+      "description": "Get a free premium mouse pad with every wireless keyboard purchase this week.",
+      "ctaText": "Grab Yours",
+      "href": "https://example.com/workspace-upgrade",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&auto=format&fit=crop&q=80",
+      "badge": "Free Gift",
+      "priority": 7,
+      "active": true
+    },
+    {
+      "id": "4",
+      "title": "Fast Charging, Premium Living",
+      "description": "Charge devices faster with our latest 4-port USB-C hub bundle offer.",
+      "ctaText": "Shop Chargers",
+      "href": "https://example.com/fast-charge",
+      "image": "https://images.unsplash.com/photo-1510557880182-3f8ed5fc7f3b?w=1200&auto=format&fit=crop&q=80",
+      "badge": "Top Pick",
+      "priority": 6,
+      "active": true
+    },
+    {
+      "id": "5",
+      "title": "Smart Home Essentials for Less",
+      "description": "Upgrade your home with smart plugs, lights, and sensors — now available in exclusive bundles.",
+      "ctaText": "Explore Bundles",
+      "href": "https://example.com/smart-home",
+      "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1200&auto=format&fit=crop&q=80",
+      "badge": "New Arrival",
+      "priority": 5,
+      "active": true
+    }
+  ],
   "users": [
     {
       "id": "1",
@@ -105,6 +162,25 @@
       "password": "123456789Aa*",
       "role": "User",
       "cart": []
+    },
+    {
+      "name": "Amr Abdelsattar",
+      "email": "amr@gmail.com",
+      "password": "123456Aa@",
+      "role": "User",
+      "id": "kyr2TDs",
+      "cart": [
+        {
+          "id": "1",
+          "name": "Nebula Wireless Headphones",
+          "price": 199.99,
+          "category": "Electronics",
+          "description": "Immersive sound with active noise cancellation and 40-hour battery life.",
+          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60",
+          "stock": 15,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "orders": [
@@ -320,6 +396,39 @@
       "total": 2199.92,
       "status": "On way",
       "createdAt": "2026-05-07T21:50:24.433Z"
+    },
+    {
+      "userId": "kyr2TDs",
+      "customer": {
+        "name": "Amr",
+        "email": "amr@gmail.com",
+        "address": "Sohag",
+        "phone": "01063981425"
+      },
+      "items": [
+        {
+          "id": "1",
+          "name": "Nebula Wireless Headphones",
+          "price": 199.99,
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Cosmic Mechanical Keyboard",
+          "price": 149.99,
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Starlight Smart Watch",
+          "price": 299.99,
+          "quantity": 9
+        }
+      ],
+      "total": 3049.89,
+      "status": "Pending",
+      "createdAt": "2026-05-16T12:20:49.831Z",
+      "id": "u3VcgJp"
     }
   ]
 }
