@@ -181,6 +181,13 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "name": "Ali Maher Mohamed",
+      "email": "ali.maher0013@gmail.com",
+      "password": "000000",
+      "role": "User",
+      "id": "V_L0FkAJ0Zo"
     }
   ],
   "orders": [
@@ -430,5 +437,6 @@
       "createdAt": "2026-05-16T12:20:49.831Z",
       "id": "u3VcgJp"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
