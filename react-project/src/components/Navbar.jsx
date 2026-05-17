@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,15 @@ import Cart from './Cart';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    // Update document direction for RTL support
+    document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lng;
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -23,7 +32,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 outline-none">
-            <span className="text-xl font-bold text-indigo-600">Galaxy Shopping</span>
+            <span className="text-xl font-bold text-indigo-600">{t('app.name')}</span>
           </Link>
 
           <div className="flex items-center gap-4">
@@ -86,14 +95,14 @@ const Navbar = () => {
                       className="cursor-pointer py-2 px-3 font-medium text-slate-700"
                       onClick={() => navigate('/dashboard')}
                     >
-                      My Account
+                      {t('nav.dashboard')}
                     </DropdownMenuItem>
 
                     <DropdownMenuItem
                       className="cursor-pointer py-2 px-3 text-red-600 focus:text-red-700 focus:bg-red-50 hover:bg-red-50 font-medium"
                       onClick={handleLogout}
                     >
-                      Sign Out
+                      {t('nav.logout')}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
