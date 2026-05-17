@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import { ShoppingCart } from 'lucide-react';
-import { useCart } from '../hooks/useCart';
-import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-
+import { useState } from "react";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "../hooks/useCart";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function AddToCartButton({
   product,
   className = "",
   showText = true,
-  variant = "primary"
+  variant = "primary",
 }) {
+  const { t } = useTranslation();
   const { addToCart, items } = useCart();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -18,9 +19,10 @@ export function AddToCartButton({
 
   if (!product) return null;
 
-  const cartItem = items.find(item => item.id === product.id);
+  const cartItem = items.find((item) => item.id === product.id);
   const isInCart = Boolean(cartItem);
-  const isOutOfStock = product.stock === 0 || (cartItem && cartItem.quantity >= product.stock);
+  const isOutOfStock =
+    product.stock === 0 || (cartItem && cartItem.quantity >= product.stock);
   const buttonDisabled = isAdding || isInCart || isOutOfStock;
 
   const handleAddToCart = async (e) => {
@@ -28,7 +30,7 @@ export function AddToCartButton({
     e.stopPropagation();
 
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
@@ -44,19 +46,21 @@ export function AddToCartButton({
     }
   };
 
-  const baseClass = "flex items-center justify-center transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+  const baseClass =
+    "flex items-center justify-center transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
   const variants = {
-    primary: "bg-slate-900 text-white hover:bg-indigo-600 shadow-lg shadow-slate-900/10 font-bold",
-    icon: "text-slate-600 hover:text-indigo-600"
+    primary:
+      "bg-slate-900 text-white hover:bg-indigo-600 shadow-lg shadow-slate-900/10 font-bold",
+    icon: "text-slate-600 hover:text-indigo-600",
   };
 
   const buttonText = isAdding
-    ? 'Adding...'
+    ? t("common.processing")
     : isInCart
-      ? 'In Cart'
-      : isOutOfStock
-        ? 'Sold Out'
-        : 'Add to Cart';
+    ? t("home.productCard.inStock")
+    : isOutOfStock
+    ? t("home.productCard.outOfStock")
+    : t("home.productCard.addToCart");
 
   return (
     <button
@@ -65,11 +69,11 @@ export function AddToCartButton({
       disabled={buttonDisabled}
       className={`${baseClass} ${variants[variant]} ${className}`}
     >
-      <ShoppingCart className={`${variant === 'icon' ? 'w-6 h-6' : 'w-4 h-4'}`} />
+      <ShoppingCart
+        className={`${variant === "icon" ? "w-6 h-6" : "w-4 h-4"}`}
+      />
       {showText && (
-        <span className="ml-2">
-          {variant === 'icon' ? '' : buttonText}
-        </span>
+        <span className="ml-2">{variant === "icon" ? "" : buttonText}</span>
       )}
     </button>
   );

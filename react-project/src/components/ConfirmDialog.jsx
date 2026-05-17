@@ -6,17 +6,26 @@ import { createPortal } from 'react-dom';
 
 
 
+import { useTranslation } from 'react-i18next';
+
 export function ConfirmDialog({
   isOpen,
   onClose,
   onConfirm,
-  title = "Are you absolutely sure?",
-  description = "This action cannot be undone. This will permanently delete the item.",
-  cancelText = "Cancel",
-  confirmText = "Continue",
+  title,
+  description,
+  cancelText,
+  confirmText,
   isLoading = false,
   variant = "danger" // "danger" or "primary"
 }) {
+  const { t } = useTranslation();
+
+  // Set default values using translations
+  const finalTitle = title || t('common.confirm');
+  const finalDescription = description || t('common.confirm');
+  const finalCancelText = cancelText || t('common.cancel');
+  const finalConfirmText = confirmText || t('common.confirm');
   // Prevent scrolling when dialog is open
   useEffect(() => {
     if (isOpen) {
@@ -48,8 +57,8 @@ export function ConfirmDialog({
         <div className="relative w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-in fade-in zoom-in duration-300 pointer-events-auto">
 
           <div className="flex flex-col space-y-2 text-center sm:text-left">
-            <h2 className="text-lg font-semibold leading-none tracking-tight">{title}</h2>
-            <p className="text-sm text-slate-500">{description}</p>
+            <h2 className="text-lg font-semibold leading-none tracking-tight">{finalTitle}</h2>
+            <p className="text-sm text-slate-500">{finalDescription}</p>
           </div>
 
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 mt-4">
@@ -59,7 +68,7 @@ export function ConfirmDialog({
               onClick={onClose}
               disabled={isLoading}
             >
-              {cancelText}
+              {finalCancelText}
             </button>
             <button
               type="button"
@@ -67,7 +76,7 @@ export function ConfirmDialog({
               onClick={onConfirm}
               disabled={isLoading}
             >
-              {isLoading ? 'Processing...' : confirmText}
+              {isLoading ? t('common.processing') : finalConfirmText}
             </button>
           </div>
 

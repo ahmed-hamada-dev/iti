@@ -7,8 +7,10 @@ import OrderStatusBadge from '../components/admin/OrderStatusBadge';
 import OrderDetailsDialog from '../components/admin/OrderDetailsDialog';
 import { useDebounce } from '../hooks/useDebounce';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const AdminOrders = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
@@ -38,14 +40,14 @@ const AdminOrders = () => {
     <div className="p-8 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Orders</h1>
-          <p className="text-slate-500">Track and manage customer shipments</p>
+          <h1 className="text-3xl font-bold text-slate-900">{t('admin.orders.title')}</h1>
+          <p className="text-slate-500">{t('admin.orders.subtitle')}</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="relative w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <Input
-              placeholder="Search by ID or Status..."
+              placeholder={t('admin.orders.searchPlaceholder')}
               className="pl-10 h-11 bg-white"
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -80,14 +82,14 @@ const AdminOrders = () => {
                 <td colSpan="7" className="px-6 py-12 text-center">
                   <div className="flex flex-col items-center gap-2">
                     <div className="w-8 h-8 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
-                    <p className="text-slate-500 font-medium">Tracking shipments...</p>
+                    <p className="text-slate-500 font-medium">{t('admin.orders.tracking')}</p>
                   </div>
                 </td>
               </tr>
             ) : !orders || orders.length === 0 ? (
               <tr>
                 <td colSpan="7" className="px-6 py-12 text-center text-slate-500 font-bold">
-                  No orders found.
+                  {t('admin.orders.noOrders')}
                 </td>
               </tr>
             ) : (
@@ -97,11 +99,11 @@ const AdminOrders = () => {
                   className={`hover:bg-slate-50/50 transition-colors group animate-fade-in stagger-${(index % 5) + 1}`}
                 >
                   <td className="px-6 py-5">
-                    <span className="font-bold text-slate-900">#{order.id}</span>
+                      <span className="font-bold text-slate-900">{t('admin.orders.orderNumber', { id: order.id })}</span>
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex flex-col">
-                      <span className="font-bold text-slate-900">{order.customer?.name || 'Guest User'}</span>
+                      <span className="font-bold text-slate-900">{order.customer?.name || t('admin.orders.guestUser')}</span>
                       <span className="text-[10px] text-slate-400 font-bold  tracking-tight">{order.customer?.email}</span>
                     </div>
                   </td>
@@ -130,7 +132,7 @@ const AdminOrders = () => {
                   </td>
                   <td className="px-6 py-5 text-right">
                     <Button variant="outline" size="sm" className="gap-2 font-bold h-9 rounded-lg" onClick={() => handleOpenDetails(order)}>
-                      <Eye className="w-4 h-4" /> Details
+                      <Eye className="w-4 h-4" /> {t('admin.orders.details')}
                     </Button>
                   </td>
                 </tr>

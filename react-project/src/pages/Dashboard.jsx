@@ -2,8 +2,9 @@ import { useAuth } from '../hooks/useAuth';
 import { useOrders } from '../hooks/useOrders';
 import { Package, Clock, CheckCircle2, Truck, XCircle, ShoppingBag } from 'lucide-react';
 import Sidebar from '../components/dashboard/Sidebar';
+import { useTranslation } from 'react-i18next';
 
-const StatusBadge = ({ status }) => {
+const StatusBadge = ({ status, t }) => {
   const styles = {
     'Pending': 'bg-amber-50 text-amber-600 border-amber-100',
     'Processing': 'bg-indigo-50 text-indigo-600 border-indigo-100',
@@ -25,12 +26,13 @@ const StatusBadge = ({ status }) => {
   return (
     <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${styles[status] || styles.Pending}`}>
       <Icon className="w-3.5 h-3.5" />
-      {status}
+      {t(`status.${status.toLowerCase().replace(' ', '')}`) || status}
     </span>
   );
 };
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { data: orders, isLoading } = useOrders({ 
     userId: user?.id ? String(user.id) : undefined,
@@ -50,28 +52,28 @@ const Dashboard = () => {
           <main className="flex-grow">
             <div className="bg-white rounded-3xl border border-slate-200 p-8 min-h-[600px] shadow-sm">
               <div className="flex justify-between items-center mb-8">
-                <h1 className="text-2xl font-black text-slate-900">Personal Dashboard</h1>
+                <h1 className="text-2xl font-black text-slate-900">{t('dashboard.title')}</h1>
                 <div className="text-right">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Member</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('dashboard.activeMember')}</p>
                   <p className="text-sm font-bold text-indigo-600">ID: {user?.id}</p>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                  <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-indigo-600 font-bold text-xs uppercase tracking-wider mb-1">Total Spending</h4>
-                      <p className="text-3xl font-black text-slate-900">${totalSpent.toFixed(2)}</p>
-                    </div>
+                     <div>
+                       <h4 className="text-indigo-600 font-bold text-xs uppercase tracking-wider mb-1">{t('dashboard.stats.totalSpending')}</h4>
+                       <p className="text-3xl font-black text-slate-900">${totalSpent.toFixed(2)}</p>
+                     </div>
                     <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
                       <ShoppingBag className="w-6 h-6 text-indigo-600" />
                     </div>
                  </div>
                  <div className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-emerald-600 font-bold text-xs uppercase tracking-wider mb-1">Orders Count</h4>
-                      <p className="text-3xl font-black text-slate-900">{orders?.length || 0} Items</p>
-                    </div>
+                     <div>
+                       <h4 className="text-emerald-600 font-bold text-xs uppercase tracking-wider mb-1">{t('dashboard.stats.ordersCount')}</h4>
+                       <p className="text-3xl font-black text-slate-900">{orders?.length || 0} {t('dashboard.stats.items')}</p>
+                     </div>
                     <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
                       <Package className="w-6 h-6 text-emerald-600" />
                     </div>
@@ -79,10 +81,10 @@ const Dashboard = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-indigo-600" />
-                  Recent Order History
-                </h3>
+                 <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+                   <Clock className="w-5 h-5 text-indigo-600" />
+                   {t('dashboard.recentOrders')}
+                 </h3>
 
                 {isLoading ? (
                   <div className="flex justify-center py-12">
@@ -93,8 +95,8 @@ const Dashboard = () => {
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
                        <ShoppingBag className="w-8 h-8 text-slate-200" />
                     </div>
-                    <h4 className="text-lg font-bold text-slate-800 mb-1">No orders yet</h4>
-                    <p className="text-slate-400 text-sm max-w-[200px]">Your future cosmic purchases will appear here!</p>
+                     <h4 className="text-lg font-bold text-slate-800 mb-1">{t('dashboard.noOrders')}</h4>
+                     <p className="text-slate-400 text-sm max-w-[200px]">{t('dashboard.noOrdersSubtitle')}</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -107,8 +109,8 @@ const Dashboard = () => {
                             </div>
                             <div>
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="font-bold text-slate-900">Order #{order.id}</span>
-                                <StatusBadge status={order.status} />
+                                 <span className="font-bold text-slate-900">{t('dashboard.orderNumber', { id: order.id })}</span>
+                                 <StatusBadge status={order.status} t={t} />
                               </div>
                               <p className="text-xs font-bold text-slate-400">
                                 {new Date(order.createdAt).toLocaleDateString('en-US', { 
@@ -120,7 +122,7 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="text-left sm:text-right">
-                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">Grand Total</p>
+                              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">{t('dashboard.grandTotal')}</p>
                              <p className="text-xl font-black text-slate-900">${order.total.toFixed(2)}</p>
                           </div>
                         </div>

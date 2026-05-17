@@ -36,16 +36,20 @@
     "status": "الحالة",
     "actions": "الإجراءات",
     "description": "الوصف",
-    "category": "الفئة"
+    "category": "الفئة",
+    "processing": "جاري المعالجة...",
+    "remove": "إزالة",
+    "update": "تحديث",
+    "create": "إنشاء"
   },
   "home": {
     "hero": {
-      "title": "استكشف الكون",
-      "subtitle": "معدات فاخرة لمغامراتك بين النجوم",
+      "title": "أفضل الأجهزة في المجرة",
+      "subtitle": "تسوق أحدث الأجهزة والإكسسوارات والمعدات. شحن سريع ودعم كوني وجودة فاخرة مضمونة.",
       "cta": "تسوق الآن"
     },
     "filters": {
-      "allCategories": "جميع الفئات",
+      "allCategories": "جميع المنتجات",
       "noResults": "لم يتم العثور على منتجات",
       "clearFilters": "مسح التصفية"
     },
@@ -63,78 +67,141 @@
       "password": "كلمة المرور",
       "submit": "تسجيل الدخول",
       "noAccount": "ليس لديك حساب؟",
-      "registerLink": "سجل هنا"
+      "registerLink": "أنشئ حساباً",
+      "signingIn": "جاري تسجيل الدخول...",
+      "placeholder": {
+        "email": "you@example.com",
+        "password": "••••••••"
+      },
+      "sideTitle": "أهلاً بعودتك",
+      "sideSubtitle": "تابع تجربة التسوق الفاخرة مع معداتنا الكونية"
     },
     "register": {
       "title": "إنشاء حساب",
-      "subtitle": "انضم إلى مجتمعنا الكوني",
+      "subtitle": "احصل على وصول للمعدات التقنية الحصرية",
       "name": "الاسم الكامل",
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
-      "confirmPassword": "تأكيد كلمة المرور",
       "submit": "إنشاء حساب",
       "hasAccount": "لديك حساب بالفعل؟",
-      "loginLink": "سجل دخولك هنا"
+      "loginLink": "تسجيل الدخول",
+      "creatingAccount": "جاري إنشاء الحساب...",
+      "placeholder": {
+        "name": "أحمد محمد",
+        "email": "you@example.com",
+        "password": "••••••••"
+      },
+      "sideTitle": "انضم إلى غالاكسي شوب",
+      "sideSubtitle": "ابدأ تجربة التسوق الفاخرة اليوم"
     },
     "errors": {
       "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
       "emailExists": "البريد الإلكتروني مسجل بالفعل",
       "passwordMismatch": "كلمتا المرور غير متطابقتين",
-      "required": "هذا الحقل مطلوب"
+      "required": "هذا الحقل مطلوب",
+      "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
     }
   },
   "cart": {
-    "title": "سلة التسوق",
+    "title": "سلة غالاكسي",
     "empty": "سلة التسوق فارغة",
+    "emptySubtitle": "أضف بعض العناصر الكونية للبدء!",
     "items": "عناصر",
-    "subtotal": "المجموع الفرعي",
-    "checkout": "إتمام الشراء",
+    "subtotal": "الإجمالي المتوقع",
+    "checkout": "إتمام الشراء الآن",
     "remove": "إزالة",
-    "clearCart": "إفراغ السلة"
+    "clearCart": "إفراغ السلة",
+    "removeConfirm": "إزالة من السلة",
+    "removeConfirmDesc": "هل أنت متأكد من إزالة {{itemName}} من سلة التسوق؟"
   },
   "checkout": {
-    "title": "إتمام الشراء",
-    "orderSummary": "ملخص الطلب",
-    "placeOrder": "تأكيد الطلب",
-    "success": "تم تأكيد الطلب بنجاح!",
-    "orderTotal": "إجمالي الطلب"
+    "title": "إنهاء الطلب",
+    "subtitle": "يرجى إدخال معلومات الشحن",
+    "fullName": "الاسم الكامل",
+    "emailAddress": "البريد الإلكتروني",
+    "shippingAddress": "عنوان الشحن",
+    "phoneNumber": "رقم الهاتف",
+    "totalAmount": "المبلغ الإجمالي",
+    "placeOrder": "تأكيد الطلب الكوني",
+    "placeholders": {
+      "name": "أحمد محمد",
+      "email": "ahmed@example.com",
+      "address": "123 شارع الكون، مدينة السديم",
+      "phone": "+966 50 123 4567"
+    }
   },
   "dashboard": {
-    "title": "لوحة التحكم",
+    "title": "لوحة التحكم الشخصية",
     "welcome": "أهلاً بعودتك",
+    "activeMember": "عضو نشط",
     "stats": {
-      "totalOrders": "إجمالي الطلبات",
-      "totalSpent": "إجمالي الإنفاق",
-      "recentOrders": "الطلبات الأخيرة"
+      "totalSpending": "إجمالي الإنفاق",
+      "ordersCount": "عدد الطلبات",
+      "items": "عناصر"
     },
-    "noOrders": "لا توجد طلبات بعد"
+    "recentOrders": "سجل الطلبات الأخيرة",
+    "noOrders": "لا توجد طلبات بعد",
+    "noOrdersSubtitle": "مشترياتك الكونية المستقبلية ستظهر هنا!",
+    "grandTotal": "الإجمالي",
+    "orderNumber": "طلب #{{id}}"
   },
   "admin": {
     "products": {
-      "title": "إدارة المنتجات",
+      "title": "المنتجات",
+      "subtitle": "إدارة مخزونك الكوني",
       "addProduct": "إضافة منتج",
       "editProduct": "تعديل المنتج",
       "deleteProduct": "حذف المنتج",
       "productName": "اسم المنتج",
-      "productAdded": "تمت إضافة المنتج بنجاح",
-      "productUpdated": "تم تحديث المنتج بنجاح",
-      "productDeleted": "تم حذف المنتج بنجاح"
+      "price": "السعر ($)",
+      "stock": "المخزون",
+      "category": "الفئة",
+      "imageUrl": "رابط الصورة",
+      "description": "الوصف",
+      "selectCategory": "اختر فئة",
+      "searchPlaceholder": "ابحث عن المنتجات...",
+      "scanning": "جاري فحص المخزون...",
+      "noProducts": "لم يتم العثور على عناصر كونية.",
+      "units": "وحدات",
+      "deleteConfirm": "حذف المنتج",
+      "deleteConfirmDesc": "هل أنت متأكد من حذف هذا العنصر الكوني؟ لا يمكن التراجع عن هذا الإجراء.",
+      "backToDashboard": "العودة للوحة التحكم"
     },
     "categories": {
-      "title": "إدارة الفئات",
+      "title": "الفئات",
+      "subtitle": "تنظيم متجرك الكوني",
       "addCategory": "إضافة فئة",
       "editCategory": "تعديل الفئة",
       "deleteCategory": "حذف الفئة",
       "categoryName": "اسم الفئة",
-      "categoryAdded": "تمت إضافة الفئة بنجاح",
-      "categoryUpdated": "تم تحديث الفئة بنجاح",
-      "categoryDeleted": "تم حذف الفئة بنجاح"
+      "searchPlaceholder": "ابحث عن الفئات...",
+      "scanning": "جاري فحص الفئات...",
+      "noCategories": "لم يتم العثور على فئات.",
+      "placeholder": "مثال: بدلات الفضاء",
+      "deleteConfirm": "حذف الفئة",
+      "deleteConfirmDesc": "هل أنت متأكد من حذف هذه الفئة؟",
+      "updateConfirm": "تحديث الفئة",
+      "updateConfirmDesc": "هل أنت متأكد من حفظ التغييرات على هذه الفئة؟",
+      "saveChanges": "حفظ التغييرات",
+      "backToDashboard": "العودة للوحة التحكم"
     },
     "orders": {
-      "title": "إدارة الطلبات",
-      "orderDetails": "تفاصيل الطلب",
-      "updateStatus": "تحديث الحالة",
-      "statusUpdated": "تم تحديث حالة الطلب"
+      "title": "الطلبات",
+      "subtitle": "تتبع وإدارة شحنات العملاء",
+      "searchPlaceholder": "البحث برقم الطلب أو الحالة...",
+      "tracking": "جاري تتبع الشحنات...",
+      "noOrders": "لم يتم العثور على طلبات.",
+      "orderNumber": "#{{id}}",
+      "customer": "العميل",
+      "guestUser": "مستخدم ضيف",
+      "date": "التاريخ",
+      "items": "العناصر",
+      "total": "الإجمالي",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "details": "التفاصيل",
+      "orderDetails": "تفاصيل الطلب #{{id}}",
+      "changeStatus": "تغيير الحالة"
     }
   },
   "status": {
@@ -143,6 +210,34 @@
     "onWay": "في الطريق",
     "delivered": "تم التوصيل",
     "canceled": "ملغى"
+  },
+  "product": {
+    "notFound": "المنتج غير موجود",
+    "notFoundSubtitle": "المنتج الذي تبحث عنه غير موجود أو تمت إزالته.",
+    "backToShop": "العودة للمتجر",
+    "backToProducts": "العودة للمنتجات",
+    "availability": "التوفر",
+    "inStock": "{{count}} متوفر",
+    "outOfStock": "غير متوفر",
+    "features": {
+      "freeDelivery": "شحن مجاني",
+      "freeDeliveryDesc": "للطلبات فوق 500 دولار",
+      "warranty": "ضمان سنتين",
+      "warrantyDesc": "تغطية تقنية كاملة",
+      "easyReturns": "إرجاع سهل",
+      "easyReturnsDesc": "خلال 30 يوم"
+    }
+  },
+  "sidebar": {
+    "myOrders": "طلباتي",
+    "manageOrders": "إدارة الطلبات",
+    "manageProducts": "إدارة المنتجات",
+    "manageCategories": "إدارة الفئات",
+    "signOut": "تسجيل الخروج"
+  },
+  "ads": {
+    "sponsored": "برعاية",
+    "learnMore": "اعرف المزيد"
   },
   "language": {
     "select": "اختر اللغة",

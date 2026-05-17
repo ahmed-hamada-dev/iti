@@ -1,6 +1,8 @@
 import Galaxy from '../Galaxy';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
   return (
     <section className="relative pt-24 h-[70vh] pb-32 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-[#0B0F19]" />
@@ -29,11 +31,10 @@ const Hero = () => {
 
         <div className="text-center mb-12 w-full max-w-4xl">
           <h1 className="text-5xl md:text-7xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-            The Ultimate <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-indigo-600">Gadgets</span> in the Galaxy
+            {t('home.hero.title')}
           </h1>
           <p className="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Shop the most advanced gadgets, accessories, and gear.
-            Fast shipping, cosmic support, and premium quality guaranteed.
+            {t('home.hero.subtitle')}
           </p>
         </div>
       </div>

@@ -7,8 +7,10 @@ import { Input } from '@/components/ui/input';
 import CategoryFormDialog from '../components/admin/CategoryFormDialog';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { useDebounce } from '../hooks/useDebounce';
+import { useTranslation } from 'react-i18next';
 
 const AdminCategories = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
@@ -78,17 +80,17 @@ const AdminCategories = () => {
         className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors mb-6 group font-bold text-sm"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        Back to Dashboard
+        {t('admin.categories.backToDashboard')}
       </button>
 
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Categories</h1>
-          <p className="text-slate-500">Organize your cosmic store</p>
+          <h1 className="text-3xl font-bold text-slate-900">{t('admin.categories.title')}</h1>
+          <p className="text-slate-500">{t('admin.categories.subtitle')}</p>
         </div>
         
         <Button onClick={() => handleOpenDialog()} className="bg-slate-900 hover:bg-slate-800 text-white gap-2 h-11 px-6 rounded-xl">
-          <Plus className="w-4 h-4" /> Add Category
+          <Plus className="w-4 h-4" /> {t('admin.categories.addCategory')}
         </Button>
       </div>
 
@@ -103,7 +105,7 @@ const AdminCategories = () => {
         <div className="relative grow max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input 
-            placeholder="Search categories..." 
+            placeholder={t('admin.categories.searchPlaceholder')} 
             className="pl-10 h-11 bg-white"
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -116,12 +118,12 @@ const AdminCategories = () => {
           <div className="col-span-full py-12 text-center">
             <div className="flex flex-col items-center gap-2">
               <div className="w-8 h-8 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
-              <p className="text-slate-500 font-medium">Scanning categories...</p>
+              <p className="text-slate-500 font-medium">{t('admin.categories.scanning')}</p>
             </div>
           </div>
         ) : !categories?.length ? (
           <div className="col-span-full py-12 text-center text-slate-500 font-bold">
-            No categories found.
+            {t('admin.categories.noCategories')}
           </div>
         ) : (
           categories.map((category, index) => (
@@ -162,9 +164,9 @@ const AdminCategories = () => {
         isOpen={confirmState.isOpen}
         onClose={() => setConfirmState({ ...confirmState, isOpen: false })}
         onConfirm={onConfirmAction}
-        title={confirmState.type === 'delete' ? 'Delete Category' : 'Update Category'}
-        description={confirmState.type === 'delete' ? 'Are you sure you want to delete this category?' : 'Are you sure you want to save changes to this category?'}
-        confirmText={confirmState.type === 'delete' ? 'Delete' : 'Save Changes'}
+        title={confirmState.type === 'delete' ? t('admin.categories.deleteConfirm') : t('admin.categories.updateConfirm')}
+        description={confirmState.type === 'delete' ? t('admin.categories.deleteConfirmDesc') : t('admin.categories.updateConfirmDesc')}
+        confirmText={confirmState.type === 'delete' ? t('common.delete') : t('admin.categories.saveChanges')}
         variant={confirmState.type === 'delete' ? 'danger' : 'primary'}
         isLoading={deleteCategory.isPending || updateCategory.isPending}
       />

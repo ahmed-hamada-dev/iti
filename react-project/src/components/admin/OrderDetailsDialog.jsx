@@ -2,8 +2,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import OrderStatusBadge from './OrderStatusBadge';
 import { Clock, Truck, CheckCircle, XCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const OrderDetailsDialog = ({ open, onOpenChange, order, onStatusUpdate }) => {
+  const { t } = useTranslation();
   if (!order) return null;
 
   const statusIcons = {
@@ -18,13 +20,13 @@ const OrderDetailsDialog = ({ open, onOpenChange, order, onStatusUpdate }) => {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
-             <span>Order Details #{order.id}</span>
+             <span>{t('admin.orders.orderDetails', { id: order.id })}</span>
              <OrderStatusBadge status={order.status} />
           </DialogTitle>
         </DialogHeader>
         <div className="py-4 space-y-6">
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Items</h4>
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('admin.orders.items')}</h4>
             {order.items.map((item, i) => (
               <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
                 <div className="flex items-center gap-3">
@@ -39,12 +41,12 @@ const OrderDetailsDialog = ({ open, onOpenChange, order, onStatusUpdate }) => {
           </div>
 
           <div className="flex justify-between items-center py-4 border-t border-slate-100">
-            <span className="font-bold text-slate-900">Total Amount</span>
+            <span className="font-bold text-slate-900">{t('checkout.totalAmount')}</span>
             <span className="text-2xl font-black text-indigo-600">${Number(order.total).toFixed(2)}</span>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Change Status</h4>
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('admin.orders.changeStatus')}</h4>
             <div className="grid grid-cols-2 gap-2">
               {['Pending', 'On way', 'Delivered', 'Canceled'].map(status => (
                 <Button 

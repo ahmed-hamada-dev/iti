@@ -8,8 +8,10 @@ import { Input } from '@/components/ui/input';
 import ProductFormDialog from '../components/admin/ProductFormDialog';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { useDebounce } from '../hooks/useDebounce';
+import { useTranslation } from 'react-i18next';
 
 const AdminProducts = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
@@ -67,17 +69,17 @@ const AdminProducts = () => {
         className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors mb-6 group font-bold text-sm"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        Back to Dashboard
+        {t('admin.products.backToDashboard')}
       </button>
 
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Products</h1>
-          <p className="text-slate-500">Manage your cosmic inventory</p>
+          <h1 className="text-3xl font-bold text-slate-900">{t('admin.products.title')}</h1>
+          <p className="text-slate-500">{t('admin.products.subtitle')}</p>
         </div>
 
         <Button onClick={() => handleOpenDialog()} className="bg-slate-900 hover:bg-slate-800 text-white gap-2 h-11 px-6 rounded-xl">
-          <Plus className="w-4 h-4" /> Add Product
+          <Plus className="w-4 h-4" /> {t('admin.products.addProduct')}
         </Button>
       </div>
 
@@ -93,7 +95,7 @@ const AdminProducts = () => {
         <div className="relative flex-grow max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input
-            placeholder="Search products..."
+            placeholder={t('admin.products.searchPlaceholder')}
             className="pl-10 h-11 bg-white"
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -105,11 +107,11 @@ const AdminProducts = () => {
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
-              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">Product</th>
-              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">Category</th>
-              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">Price</th>
-              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">Stock</th>
-              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider text-right">Actions</th>
+              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">{t('admin.products.productName')}</th>
+              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">{t('admin.products.category')}</th>
+              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">{t('admin.products.price')}</th>
+              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider">{t('admin.products.stock')}</th>
+              <th className="px-6 py-4 font-bold text-slate-500 text-xs uppercase tracking-wider text-right">{t('common.actions')}</th>
             </tr>
           </thead>
           <tbody key={debouncedSearch} className="divide-y divide-slate-100">
@@ -118,14 +120,14 @@ const AdminProducts = () => {
                 <td colSpan="5" className="px-6 py-12 text-center">
                   <div className="flex flex-col items-center gap-2">
                     <div className="w-8 h-8 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
-                    <p className="text-slate-500 font-medium">Scanning inventory...</p>
+                     <p className="text-slate-500 font-medium">{t('admin.products.scanning')}</p>
                   </div>
                 </td>
               </tr>
             ) : !products?.length ? (
               <tr>
                 <td colSpan="5" className="px-6 py-12 text-center text-slate-500 font-bold">
-                  No cosmic items found.
+                  {t('admin.products.noProducts')}
                 </td>
               </tr>
             ) : (
@@ -144,7 +146,7 @@ const AdminProducts = () => {
                   <td className="px-6 py-4 font-black text-slate-900">${product.price}</td>
                   <td className="px-6 py-4 text-sm">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${product.stock > 5 ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
-                      {product.stock} units
+                      {product.stock} {t('admin.products.units')}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -168,8 +170,8 @@ const AdminProducts = () => {
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={confirmDelete}
-        title="Delete Product"
-        description="Are you sure you want to delete this cosmic item? This action cannot be undone."
+        title={t('admin.products.deleteConfirm')}
+        description={t('admin.products.deleteConfirmDesc')}
         isLoading={deleteProduct.isPending}
       />
     </div>

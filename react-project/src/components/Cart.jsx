@@ -8,8 +8,10 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from './ConfirmDialog';
 import { CheckoutDialog } from './CheckoutDialog';
 import { useCreateOrder } from '../hooks/useOrders';
+import { useTranslation } from 'react-i18next';
 
 const Cart = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { items, removeFromCart, updateQuantity, total, itemCount, clearCart } = useCart();
@@ -79,7 +81,7 @@ const Cart = () => {
           <DialogHeader>
             <DialogTitle className="text-2xl font-black text-slate-900 flex items-center gap-3">
               <ShoppingBag className="w-6 h-6 text-indigo-600" />
-              Galaxy Cart
+              {t('cart.title')}
             </DialogTitle>
           </DialogHeader>
 
@@ -90,8 +92,8 @@ const Cart = () => {
                   <ShoppingCart className="w-10 h-10 text-slate-300" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-800">Your cart is empty</h3>
-                  <p className="text-slate-500 text-sm">Add some cosmic items to get started!</p>
+                  <h3 className="text-lg font-bold text-slate-800">{t('cart.empty')}</h3>
+                  <p className="text-slate-500 text-sm">{t('cart.emptySubtitle')}</p>
                 </div>
               </div>
             ) : (
@@ -143,14 +145,14 @@ const Cart = () => {
           {items.length > 0 && (
             <div className="pt-6 border-t border-slate-100 space-y-4">
               <div className="flex justify-between items-center px-2">
-                <span className="text-slate-500 font-bold">Estimated Total</span>
+                <span className="text-slate-500 font-bold">{t('cart.subtotal')}</span>
                 <span className="text-2xl font-black text-slate-900">${total.toFixed(2)}</span>
               </div>
               <Button
                 onClick={() => setIsCheckoutOpen(true)}
                 className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black h-14 rounded-2xl text-lg shadow-xl shadow-slate-900/10 cursor-pointer"
               >
-                Checkout Now
+                {t('cart.checkout')}
               </Button>
             </div>
           )}
@@ -161,9 +163,9 @@ const Cart = () => {
         isOpen={confirmDelete.isOpen}
         onClose={() => setConfirmDelete({ ...confirmDelete, isOpen: false })}
         onConfirm={handleConfirmDelete}
-        title="Remove from Cart"
-        description={`Are you sure you want to remove ${confirmDelete.itemName} from your cart?`}
-        confirmText="Remove"
+        title={t('cart.removeConfirm')}
+        description={t('cart.removeConfirmDesc', { itemName: confirmDelete.itemName })}
+        confirmText={t('cart.remove')}
         variant="danger"
       />
 

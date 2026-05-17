@@ -1,15 +1,17 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Package, User, LogOut, ShoppingBag, Tag, LayoutDashboard } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = ({ user, logout }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
   const navItems = [
-    { label: 'My Orders', icon: ShoppingBag, path: '/dashboard', adminOnly: false },
-    { label: 'Manage Orders', icon: Package, path: '/orders', adminOnly: true },
-    { label: 'Manage Products', icon: LayoutDashboard, path: '/dashboard/products', adminOnly: true },
-    { label: 'Manage Categories', icon: Tag, path: '/dashboard/categories', adminOnly: true },
+    { label: t('sidebar.myOrders'), icon: ShoppingBag, path: '/dashboard', adminOnly: false },
+    { label: t('sidebar.manageOrders'), icon: Package, path: '/orders', adminOnly: true },
+    { label: t('sidebar.manageProducts'), icon: LayoutDashboard, path: '/dashboard/products', adminOnly: true },
+    { label: t('sidebar.manageCategories'), icon: Tag, path: '/dashboard/categories', adminOnly: true },
   ];
 
   const activeItems = navItems.filter(item => !item.adminOnly || user?.role === 'Admin');
@@ -47,7 +49,7 @@ const Sidebar = ({ user, logout }) => {
             className="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl font-bold transition-all"
           >
             <LogOut className="w-5 h-5" />
-            Sign Out
+            {t('sidebar.signOut')}
           </button>
         </div>
       </nav>

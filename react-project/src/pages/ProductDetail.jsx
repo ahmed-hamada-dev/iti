@@ -4,8 +4,10 @@ import { useCart } from '../hooks/useCart';
 import { AddToCartButton } from '../components/AddToCartButton';
 import { ArrowLeft, Star, ShieldCheck, Truck, RefreshCcw } from 'lucide-react';
 import Galaxy from '../components/Galaxy';
+import { useTranslation } from 'react-i18next';
 
 const ProductDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: product, isLoading, error } = useProduct(id);
@@ -20,14 +22,14 @@ const ProductDetail = () => {
 
   if (error || !product) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">Product not found</h2>
-        <p className="text-slate-500 mb-8">The product you're looking for doesn't exist or has been removed.</p>
+        <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
+        <h2 className="text-2xl font-bold text-slate-800 mb-2">{t('product.notFound')}</h2>
+        <p className="text-slate-500 mb-8">{t('product.notFoundSubtitle')}</p>
         <button
           onClick={() => navigate('/')}
           className="px-6 py-3 bg-slate-900 text-white rounded-xl font-medium"
         >
-          Back to Shop
+          {t('product.backToShop')}
         </button>
       </div>
     );
@@ -44,7 +46,7 @@ const ProductDetail = () => {
           className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Products
+          {t('product.backToProducts')}
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -93,8 +95,8 @@ const ProductDetail = () => {
                   <Truck className="w-5 h-5" />
                 </div>
                 <div className="text-xs">
-                  <p className="font-bold text-slate-900">Free Delivery</p>
-                  <p className="text-slate-500">On orders over $500</p>
+                  <p className="font-bold text-slate-900">{t('product.features.freeDelivery')}</p>
+                  <p className="text-slate-500">{t('product.features.freeDeliveryDesc')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -102,8 +104,8 @@ const ProductDetail = () => {
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div className="text-xs">
-                  <p className="font-bold text-slate-900">2 Year Warranty</p>
-                  <p className="text-slate-500">Full tech coverage</p>
+                  <p className="font-bold text-slate-900">{t('product.features.warranty')}</p>
+                  <p className="text-slate-500">{t('product.features.warrantyDesc')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -111,17 +113,17 @@ const ProductDetail = () => {
                   <RefreshCcw className="w-5 h-5" />
                 </div>
                 <div className="text-xs">
-                  <p className="font-bold text-slate-900">Easy Returns</p>
-                  <p className="text-slate-500">30-day window</p>
+                  <p className="font-bold text-slate-900">{t('product.features.easyReturns')}</p>
+                  <p className="text-slate-500">{t('product.features.easyReturnsDesc')}</p>
                 </div>
               </div>
             </div>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-700">Availability</span>
+                <span className="text-sm font-medium text-slate-700">{t('product.availability')}</span>
                 <span className={`text-sm font-bold ${product.stock > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
-                  {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                  {product.stock > 0 ? t('product.inStock', { count: product.stock }) : t('product.outOfStock')}
                 </span>
               </div>
 

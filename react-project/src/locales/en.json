@@ -36,16 +36,20 @@
     "status": "Status",
     "actions": "Actions",
     "description": "Description",
-    "category": "Category"
+    "category": "Category",
+    "processing": "Processing...",
+    "remove": "Remove",
+    "update": "Update",
+    "create": "Create"
   },
   "home": {
     "hero": {
-      "title": "Explore the Cosmos",
-      "subtitle": "Premium gear for your interstellar adventures",
+      "title": "The Ultimate Gadgets in the Galaxy",
+      "subtitle": "Shop the most advanced gadgets, accessories, and gear. Fast shipping, cosmic support, and premium quality guaranteed.",
       "cta": "Shop Now"
     },
     "filters": {
-      "allCategories": "All Categories",
+      "allCategories": "All Products",
       "noResults": "No products found",
       "clearFilters": "Clear Filters"
     },
@@ -61,88 +65,179 @@
       "subtitle": "Sign in to your account",
       "email": "Email",
       "password": "Password",
-      "submit": "Login",
+      "submit": "Sign In",
       "noAccount": "Don't have an account?",
-      "registerLink": "Register here"
+      "registerLink": "Create one",
+      "signingIn": "Signing in...",
+      "placeholder": {
+        "email": "you@example.com",
+        "password": "••••••••"
+      },
+      "sideTitle": "Welcome Back",
+      "sideSubtitle": "Continue your premium shopping experience with our cosmic gear"
     },
     "register": {
       "title": "Create Account",
-      "subtitle": "Join our cosmic community",
+      "subtitle": "Get access to exclusive tech gear",
       "name": "Full Name",
       "email": "Email",
       "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "submit": "Register",
+      "submit": "Create Account",
       "hasAccount": "Already have an account?",
-      "loginLink": "Login here"
+      "loginLink": "Sign in",
+      "creatingAccount": "Creating account...",
+      "placeholder": {
+        "name": "John Doe",
+        "email": "you@example.com",
+        "password": "••••••••"
+      },
+      "sideTitle": "Join Galaxy Shop",
+      "sideSubtitle": "Start your premium shopping experience today"
     },
     "errors": {
       "invalidCredentials": "Invalid email or password",
       "emailExists": "Email already exists",
       "passwordMismatch": "Passwords do not match",
-      "required": "This field is required"
+      "required": "This field is required",
+      "registrationFailed": "Registration failed. Please try again."
     }
   },
   "cart": {
-    "title": "Your Cart",
+    "title": "Galaxy Cart",
     "empty": "Your cart is empty",
+    "emptySubtitle": "Add some cosmic items to get started!",
     "items": "items",
-    "subtotal": "Subtotal",
-    "checkout": "Checkout",
+    "subtotal": "Estimated Total",
+    "checkout": "Checkout Now",
     "remove": "Remove",
-    "clearCart": "Clear Cart"
+    "clearCart": "Clear Cart",
+    "removeConfirm": "Remove from Cart",
+    "removeConfirmDesc": "Are you sure you want to remove {{itemName}} from your cart?"
   },
   "checkout": {
-    "title": "Checkout",
-    "orderSummary": "Order Summary",
-    "placeOrder": "Place Order",
-    "success": "Order placed successfully!",
-    "orderTotal": "Order Total"
+    "title": "Finalize Order",
+    "subtitle": "Please enter your shipping information",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "shippingAddress": "Shipping Address",
+    "phoneNumber": "Phone Number",
+    "totalAmount": "Total Amount",
+    "placeOrder": "Place Cosmic Order",
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "address": "123 Cosmic St, Nebula City",
+      "phone": "+1 234 567 890"
+    }
   },
   "dashboard": {
-    "title": "Dashboard",
+    "title": "Personal Dashboard",
     "welcome": "Welcome back",
+    "activeMember": "Active Member",
     "stats": {
-      "totalOrders": "Total Orders",
-      "totalSpent": "Total Spent",
-      "recentOrders": "Recent Orders"
+      "totalSpending": "Total Spending",
+      "ordersCount": "Orders Count",
+      "items": "Items"
     },
-    "noOrders": "No orders yet"
+    "recentOrders": "Recent Order History",
+    "noOrders": "No orders yet",
+    "noOrdersSubtitle": "Your future cosmic purchases will appear here!",
+    "grandTotal": "Grand Total",
+    "orderNumber": "Order #{{id}}"
   },
   "admin": {
     "products": {
-      "title": "Manage Products",
+      "title": "Products",
+      "subtitle": "Manage your cosmic inventory",
       "addProduct": "Add Product",
       "editProduct": "Edit Product",
       "deleteProduct": "Delete Product",
       "productName": "Product Name",
-      "productAdded": "Product added successfully",
-      "productUpdated": "Product updated successfully",
-      "productDeleted": "Product deleted successfully"
+      "price": "Price ($)",
+      "stock": "Stock",
+      "category": "Category",
+      "imageUrl": "Image URL",
+      "description": "Description",
+      "selectCategory": "Select a category",
+      "searchPlaceholder": "Search products...",
+      "scanning": "Scanning inventory...",
+      "noProducts": "No cosmic items found.",
+      "units": "units",
+      "deleteConfirm": "Delete Product",
+      "deleteConfirmDesc": "Are you sure you want to delete this cosmic item? This action cannot be undone.",
+      "backToDashboard": "Back to Dashboard"
     },
     "categories": {
-      "title": "Manage Categories",
+      "title": "Categories",
+      "subtitle": "Organize your cosmic store",
       "addCategory": "Add Category",
       "editCategory": "Edit Category",
       "deleteCategory": "Delete Category",
       "categoryName": "Category Name",
-      "categoryAdded": "Category added successfully",
-      "categoryUpdated": "Category updated successfully",
-      "categoryDeleted": "Category deleted successfully"
+      "searchPlaceholder": "Search categories...",
+      "scanning": "Scanning categories...",
+      "noCategories": "No categories found.",
+      "placeholder": "e.g. Space Suits",
+      "deleteConfirm": "Delete Category",
+      "deleteConfirmDesc": "Are you sure you want to delete this category?",
+      "updateConfirm": "Update Category",
+      "updateConfirmDesc": "Are you sure you want to save changes to this category?",
+      "saveChanges": "Save Changes",
+      "backToDashboard": "Back to Dashboard"
     },
     "orders": {
-      "title": "Manage Orders",
-      "orderDetails": "Order Details",
-      "updateStatus": "Update Status",
-      "statusUpdated": "Order status updated"
+      "title": "Orders",
+      "subtitle": "Track and manage customer shipments",
+      "searchPlaceholder": "Search by ID or Status...",
+      "tracking": "Tracking shipments...",
+      "noOrders": "No orders found.",
+      "orderNumber": "#{{id}}",
+      "customer": "Customer",
+      "guestUser": "Guest User",
+      "date": "Date",
+      "items": "Items",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Actions",
+      "details": "Details",
+      "orderDetails": "Order Details #{{id}}",
+      "changeStatus": "Change Status"
     }
   },
   "status": {
     "pending": "Pending",
     "processing": "Processing",
-    "onWay": "On Way",
+    "onWay": "On way",
     "delivered": "Delivered",
     "canceled": "Canceled"
+  },
+  "product": {
+    "notFound": "Product not found",
+    "notFoundSubtitle": "The product you're looking for doesn't exist or has been removed.",
+    "backToShop": "Back to Shop",
+    "backToProducts": "Back to Products",
+    "availability": "Availability",
+    "inStock": "{{count}} in stock",
+    "outOfStock": "Out of stock",
+    "features": {
+      "freeDelivery": "Free Delivery",
+      "freeDeliveryDesc": "On orders over $500",
+      "warranty": "2 Year Warranty",
+      "warrantyDesc": "Full tech coverage",
+      "easyReturns": "Easy Returns",
+      "easyReturnsDesc": "30-day window"
+    }
+  },
+  "sidebar": {
+    "myOrders": "My Orders",
+    "manageOrders": "Manage Orders",
+    "manageProducts": "Manage Products",
+    "manageCategories": "Manage Categories",
+    "signOut": "Sign Out"
+  },
+  "ads": {
+    "sponsored": "Sponsored",
+    "learnMore": "Learn More"
   },
   "language": {
     "select": "Select Language",

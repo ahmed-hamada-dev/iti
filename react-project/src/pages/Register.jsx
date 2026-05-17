@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegister } from '../hooks/useAuth';
 import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const registerMutation = useRegister();
   const { isAuthenticated, loading, login } = useAuth();
@@ -29,7 +31,7 @@ const Register = () => {
         navigate('/');
       },
       onError: (err) => {
-        setError(err.response?.data?.message || 'Registration failed. Please try again.');
+        setError(err.response?.data?.message || t('auth.errors.registrationFailed'));
       },
     });
   };
@@ -46,8 +48,8 @@ const Register = () => {
             <div className="w-24 h-24 mx-auto mb-8 rounded-2xl bg-linear-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
               <span className="text-white font-bold text-5xl">L</span>
             </div>
-            <h2 className="text-4xl font-bold text-white mb-4">Join Galaxy Shop</h2>
-            <p className="text-slate-300 text-lg">Start your premium shopping experience today</p>
+            <h2 className="text-4xl font-bold text-white mb-4">{t('auth.register.sideTitle')}</h2>
+            <p className="text-slate-300 text-lg">{t('auth.register.sideSubtitle')}</p>
           </div>
         </div>
       </div>
@@ -58,11 +60,11 @@ const Register = () => {
             <div className="w-10 h-10 rounded-lg bg-linear-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
               <span className="text-white font-bold text-xl">L</span>
             </div>
-            <span className="text-2xl font-bold text-slate-800">Galaxy Shop</span>
+            <span className="text-2xl font-bold text-slate-800">{t('app.name')}</span>
           </div>
 
-          <h2 className="text-3xl font-bold text-slate-800 mb-2">Create Account</h2>
-          <p className="text-slate-500 mb-8">Get access to exclusive tech gear</p>
+          <h2 className="text-3xl font-bold text-slate-800 mb-2">{t('auth.register.title')}</h2>
+          <p className="text-slate-500 mb-8">{t('auth.register.subtitle')}</p>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
@@ -71,58 +73,58 @@ const Register = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
+          <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.name')}</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="John Doe"
+                placeholder={t('auth.register.placeholder.name')}
                 required
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
-
+ 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.email')}</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="you@example.com"
+                placeholder={t('auth.register.placeholder.email')}
                 required
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
-
+ 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.password')}</label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder={t('auth.register.placeholder.password')}
                 required
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
-
+ 
             <button
               type="submit"
               disabled={registerMutation.isPending}
               className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
             >
-              {registerMutation.isPending ? 'Creating account...' : 'Create Account'}
+              {registerMutation.isPending ? t('auth.register.creatingAccount') : t('auth.register.submit')}
             </button>
           </form>
 
           <p className="mt-8 text-center text-slate-500">
-            Already have an account?{' '}
+            {t('auth.register.hasAccount')}{' '}
             <Link to="/login" className="text-indigo-600 hover:text-indigo-700 font-medium">
-              Sign in
+              {t('auth.register.loginLink')}
             </Link>
           </p>
         </div>

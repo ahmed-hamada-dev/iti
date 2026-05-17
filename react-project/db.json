@@ -187,7 +187,20 @@
       "email": "ali.maher0013@gmail.com",
       "password": "000000",
       "role": "User",
-      "id": "V_L0FkAJ0Zo"
+      "id": "V_L0FkAJ0Zo",
+      "cart": [
+        {
+          "id": "d2a4",
+          "name": "test",
+          "price": 1.5,
+          "category": "Electronics",
+          "description": "test",
+          "image": "https:123",
+          "stock": 2,
+          "rating": 5,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "orders": [

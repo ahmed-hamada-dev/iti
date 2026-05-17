@@ -3,8 +3,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useTranslation } from 'react-i18next';
 
 const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categories }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     price: '',
@@ -31,11 +33,11 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>{initialData ? 'Edit Product' : 'Add New Product'}</DialogTitle>
+          <DialogTitle>{initialData ? t('admin.products.editProduct') : t('admin.products.addProduct')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Product Name</label>
+            <label className="text-sm font-medium">{t('admin.products.productName')}</label>
             <Input 
               value={formData.name} 
               onChange={e => setFormData({...formData, name: e.target.value})} 
@@ -44,7 +46,7 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Price ($)</label>
+              <label className="text-sm font-medium">{t('admin.products.price')}</label>
               <Input 
                 type="number" step="0.01" 
                 value={formData.price} 
@@ -53,7 +55,7 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Stock</label>
+              <label className="text-sm font-medium">{t('admin.products.stock')}</label>
               <Input 
                 type="number" 
                 value={formData.stock} 
@@ -63,19 +65,19 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">Category</label>
+            <label className="text-sm font-medium">{t('admin.products.category')}</label>
             <select 
               className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
               value={formData.category}
               onChange={e => setFormData({...formData, category: e.target.value})}
               required
             >
-              <option value="">Select a category</option>
+              <option value="">{t('admin.products.selectCategory')}</option>
               {categories?.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
             </select>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">Image URL</label>
+            <label className="text-sm font-medium">{t('admin.products.imageUrl')}</label>
             <Input 
               value={formData.image} 
               onChange={e => setFormData({...formData, image: e.target.value})} 
@@ -83,7 +85,7 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">Description</label>
+            <label className="text-sm font-medium">{t('admin.products.description')}</label>
             <Textarea 
               value={formData.description} 
               onChange={e => setFormData({...formData, description: e.target.value})} 
@@ -92,7 +94,7 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
           </div>
           <DialogFooter>
             <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold h-12 rounded-xl">
-              {initialData ? 'Update Product' : 'Create Product'}
+              {initialData ? t('common.update') : t('common.create')}
             </Button>
           </DialogFooter>
         </form>

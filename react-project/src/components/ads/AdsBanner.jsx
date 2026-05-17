@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useAds } from '../../hooks/useAds';
+import { useTranslation } from 'react-i18next';
 
 const MAX_SLIDES = 5;
 const AUTO_ROTATE_MS = 7000;
 
 const AdsBanner = () => {
+    const { t } = useTranslation();
     const { data: ads = [], isLoading, error } = useAds({ active: true, _sort: 'priority', _order: 'desc', _limit: MAX_SLIDES });
     const slides = useMemo(() => ads.slice(0, MAX_SLIDES), [ads]);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -45,7 +47,7 @@ const AdsBanner = () => {
                 <div className="flex h-full flex-col justify-between">
                     <div className="max-w-4xl space-y-6">
                         <span className="inline-flex items-center gap-2 rounded-full bg-indigo-500/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200 ring-1 ring-indigo-400/20">
-                            Sponsored
+                            {t('ads.sponsored')}
                         </span>
                         <div className="space-y-4">
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">{ad.title}</h2>
@@ -62,7 +64,7 @@ const AdsBanner = () => {
                             rel="noreferrer"
                             className="inline-flex items-center justify-center gap-2 rounded-3xl bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                         >
-                            {ad.ctaText || 'Learn More'}
+                            {ad.ctaText || t('ads.learnMore')}
                             <ArrowRight className="h-4 w-4" />
                         </a>
                         {ad.badge && (
