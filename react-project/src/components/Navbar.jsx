@@ -113,16 +113,40 @@ const Navbar = () => {
                   to="/login"
                   className="text-slate-600 hover:text-slate-900 font-medium transition-colors"
                 >
-                  Login
+                  {t('nav.login')}
                 </Link>
                 <Link
                   to="/register"
                   className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg transition-colors"
                 >
-                  Sign Up
+                  {t('nav.register')}
                 </Link>
               </>
             )}
+
+            {/* Language Switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-1 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                  <span>{i18n.language === 'ar' ? '🇸🇦' : '🇬🇧'}</span>
+                  <span className="font-medium">{i18n.language.toUpperCase()}</span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-40">
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => changeLanguage('en')}
+                >
+                  🇬🇧 {t('language.english')}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => changeLanguage('ar')}
+                >
+                  🇸🇦 {t('language.arabic')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
