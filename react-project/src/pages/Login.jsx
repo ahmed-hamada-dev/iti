@@ -60,11 +60,11 @@ const Login = () => {
             <div className="w-10 h-10 rounded-lg bg-linear-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
               <span className="text-white font-bold text-xl">L</span>
             </div>
-            <span className="text-2xl font-bold text-slate-800">{t('app.name')}</span>
+            <span className="text-2xl font-bold text-foreground dark:text-white">{t('app.name')}</span>
           </div>
           
-           <h2 className="text-3xl font-bold text-slate-800 mb-2">{t('auth.login.title')}</h2>
-           <p className="text-slate-500 mb-8">{t('auth.login.subtitle')}</p>
+           <h2 className="text-3xl font-bold text-foreground dark:text-white mb-2">{t('auth.login.title')}</h2>
+           <p className="text-slate-500 dark:text-slate-400 mb-8">{t('auth.login.subtitle')}</p>
           
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
@@ -74,7 +74,7 @@ const Login = () => {
           
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.login.email')}</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{t('auth.login.email')}</label>
               <input
                 type="email"
                 name="email"
@@ -82,12 +82,12 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder={t('auth.login.placeholder.email')}
                 required
-                className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-foreground dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.login.password')}</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{t('auth.login.password')}</label>
               <input
                 type="password"
                 name="password"
@@ -95,7 +95,7 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder={t('auth.login.placeholder.password')}
                 required
-                className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-foreground dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
             

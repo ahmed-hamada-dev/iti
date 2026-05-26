@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Cart from './Cart';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -28,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 outline-none">
@@ -41,9 +42,9 @@ const Navbar = () => {
                 <Cart />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium transition-colors outline-none cursor-pointer">
-                      <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center">
-                        <span className="text-sm font-medium text-slate-600">
+                    <button className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium transition-colors outline-none cursor-pointer">
+                      <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+                        <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
                           {user?.name?.[0]?.toUpperCase() || '?'}
                         </span>
                       </div>
@@ -55,8 +56,8 @@ const Navbar = () => {
 
                   <DropdownMenuContent align="end" className="w-56 p-2 rounded-xl">
                     <div className="px-3 py-2">
-                      <p className="text-sm font-semibold text-slate-800">{user?.name}</p>
-                      <p className="text-xs text-slate-500 mb-2 truncate">{user?.email}</p>
+                      <p className="text-sm font-semibold text-yellow-500 dark: font-bold">{user?.name}</p>
+                      <p className="text-xs text-slate-500 mb-2 truncate dark:text-white font-bold">{user?.email}</p>
                       <span className={`inline-flex px-2 py-0.5 text-xs font-semibold rounded-full ${user?.role === 'Admin'
                         ? 'bg-indigo-100 text-indigo-700'
                         : 'bg-emerald-100 text-emerald-700'
@@ -92,7 +93,7 @@ const Navbar = () => {
                     )}
 
                     <DropdownMenuItem
-                      className="cursor-pointer py-2 px-3 font-medium text-slate-700"
+                      className="cursor-pointer py-2 px-3 font-medium text-slate-800 dark:text-white focus:text-slate-900 dark:focus:text-white"
                       onClick={() => navigate('/dashboard')}
                     >
                       {t('nav.dashboard')}
@@ -111,7 +112,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium transition-colors"
                 >
                   {t('nav.login')}
                 </Link>
@@ -123,6 +124,9 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+
+            {/* Theme Switcher */}
+            <ThemeToggle />
 
             {/* Language Switcher */}
             <DropdownMenu>

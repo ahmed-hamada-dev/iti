@@ -40,15 +40,15 @@ const AdminOrders = () => {
     <div className="p-8 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">{t('admin.orders.title')}</h1>
-          <p className="text-slate-500">{t('admin.orders.subtitle')}</p>
+          <h1 className="text-3xl font-bold text-foreground dark:text-white">{t('admin.orders.title')}</h1>
+          <p className="text-slate-500 dark:text-slate-400">{t('admin.orders.subtitle')}</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="relative w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
             <Input
               placeholder={t('admin.orders.searchPlaceholder')}
-              className="pl-10 h-11 bg-white"
+              className="pl-10 h-11 bg-white dark:bg-slate-800"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -63,32 +63,32 @@ const AdminOrders = () => {
         onStatusUpdate={handleStatusUpdate}
       />
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200">
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider">Order</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider">Customer</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider">Date</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider text-center">Items</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider">Total</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider">Status</th>
-              <th className="px-6 py-5 font-bold text-slate-500 text-xs uppercase tracking-wider text-right">Actions</th>
+            <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">Order</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">Customer</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">Date</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider text-center">Items</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">Total</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">Status</th>
+              <th className="px-6 py-5 font-bold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             {isLoading ? (
               <tr>
                 <td colSpan="7" className="px-6 py-12 text-center">
                   <div className="flex flex-col items-center gap-2">
-                    <div className="w-8 h-8 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
-                    <p className="text-slate-500 font-medium">{t('admin.orders.tracking')}</p>
+                    <div className="w-8 h-8 border-4 border-slate-200 dark:border-slate-700 border-t-indigo-500 dark:border-t-indigo-400 rounded-full animate-spin" />
+                    <p className="text-slate-500 dark:text-slate-400 font-medium">{t('admin.orders.tracking')}</p>
                   </div>
                 </td>
               </tr>
             ) : !orders || orders.length === 0 ? (
               <tr>
-                <td colSpan="7" className="px-6 py-12 text-center text-slate-500 font-bold">
+                <td colSpan="7" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400 font-bold">
                   {t('admin.orders.noOrders')}
                 </td>
               </tr>
@@ -96,36 +96,36 @@ const AdminOrders = () => {
               orders.map((order, index) => (
                 <tr
                   key={order.id}
-                  className={`hover:bg-slate-50/50 transition-colors group animate-fade-in stagger-${(index % 5) + 1}`}
+                  className={`hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group animate-fade-in stagger-${(index % 5) + 1}`}
                 >
                   <td className="px-6 py-5">
-                      <span className="font-bold text-slate-900">{t('admin.orders.orderNumber', { id: order.id })}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{t('admin.orders.orderNumber', { id: order.id })}</span>
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex flex-col">
-                      <span className="font-bold text-slate-900">{order.customer?.name || t('admin.orders.guestUser')}</span>
-                      <span className="text-[10px] text-slate-400 font-bold  tracking-tight">{order.customer?.email}</span>
+                      <span className="font-bold text-slate-900 dark:text-white">{order.customer?.name || t('admin.orders.guestUser')}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold  tracking-tight">{order.customer?.email}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-5 text-sm text-slate-500 font-medium">
+                  <td className="px-6 py-5 text-sm text-slate-500 dark:text-slate-400 font-medium">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-5 text-center">
                     <div className="flex items-center justify-center -space-x-2 overflow-hidden">
                       {order.items.slice(0, 3).map((item, i) => (
-                        <div key={i} className=" h-8 w-8 rounded-full ring-2 ring-white bg-indigo-50 flex items-center justify-center text-[10px] font-black text-indigo-600 uppercase border border-indigo-100 shadow-sm">
+                        <div key={i} className=" h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900 bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase border border-indigo-100 dark:border-indigo-800 shadow-sm">
                           {item.name[0]}
                         </div>
                       ))}
                       {order.items.length > 3 && (
-                        <div className=" h-8 w-8 rounded-full ring-2 ring-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400 border border-slate-200">
+                        <div className=" h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700">
                           +{order.items.length - 3}
                         </div>
                       )}
                     </div>
                   </td>
                   <td className="px-6 py-5">
-                    <span className="font-black text-slate-900">${order.total.toFixed(2)}</span>
+                    <span className="font-black text-slate-900 dark:text-white">${order.total.toFixed(2)}</span>
                   </td>
                   <td className="px-6 py-5">
                     <OrderStatusBadge status={order.status} />

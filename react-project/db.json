@@ -201,6 +201,14 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "name": "ali",
+      "email": "nameqwerty10@gmail.com",
+      "password": "asd",
+      "role": "User",
+      "id": "GwoPGfC",
+      "cart": []
     }
   ],
   "orders": [
@@ -449,6 +457,27 @@
       "status": "Pending",
       "createdAt": "2026-05-16T12:20:49.831Z",
       "id": "u3VcgJp"
+    },
+    {
+      "userId": "GwoPGfC",
+      "customer": {
+        "name": "Mohamed Maged",
+        "email": "nameqwerty10@gmail.com",
+        "address": "123 ",
+        "phone": "1234567890"
+      },
+      "items": [
+        {
+          "id": "2",
+          "name": "Cosmic Mechanical Keyboard",
+          "price": 149.99,
+          "quantity": 8
+        }
+      ],
+      "total": 1199.92,
+      "status": "Pending",
+      "createdAt": "2026-05-22T03:59:12.601Z",
+      "id": "1UJVq69"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

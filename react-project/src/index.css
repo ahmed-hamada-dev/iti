@@ -150,3 +150,80 @@ body {
   .stagger-4 { animation-delay: 0.2s; }
   .stagger-5 { animation-delay: 0.25s; }
 }
+
+/* Dark Mode Component Styles */
+@layer components {
+  /* Navbar dark mode */
+  .dark nav {
+    @apply bg-slate-950/80 border-slate-700;
+  }
+
+  .dark .text-slate-600 {
+    @apply text-slate-300;
+  }
+
+  .dark .text-slate-900 {
+    @apply text-slate-100;
+  }
+
+  .dark .hover\:text-slate-900:hover {
+    @apply text-slate-100;
+  }
+
+  .dark .border-slate-200 {
+    @apply border-slate-700;
+  }
+
+  .dark .hover\:bg-slate-50:hover {
+    @apply bg-slate-800;
+  }
+
+  .dark .bg-slate-200 {
+    @apply bg-slate-700;
+  }
+
+  .dark .bg-slate-900 {
+    @apply bg-slate-100;
+  }
+
+  .dark .text-white {
+    @apply text-slate-950;
+  }
+
+  .dark .hover\:bg-slate-800:hover {
+    @apply bg-slate-700;
+  }
+
+  /* Input fields dark mode */
+  .dark input,
+  .dark textarea,
+  .dark select {
+    @apply bg-slate-900 text-slate-100 border-slate-700;
+  }
+
+  .dark input::placeholder {
+    @apply text-slate-500;
+  }
+
+  /* Card dark mode */
+  .dark .bg-white {
+    @apply bg-slate-900;
+  }
+
+  .dark .bg-white\/80 {
+    @apply bg-slate-900/80;
+  }
+
+  /* Dropdown menu dark mode */
+  .dark [role="menu"] {
+    @apply bg-slate-900 border-slate-700;
+  }
+
+  .dark [role="menuitem"] {
+    @apply text-slate-300;
+  }
+
+  .dark [role="menuitem"]:hover {
+    @apply bg-slate-800;
+  }
+}

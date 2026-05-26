@@ -77,10 +77,10 @@ const Cart = () => {
             )}
           </button>
         </DialogTrigger>
-        <DialogContent className="max-w-md overflow-y-scroll bg-white/95 backdrop-blur-xl border-slate-200 rounded-3xl">
+        <DialogContent className="max-w-md overflow-y-scroll bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200 dark:border-slate-700 rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-black text-slate-900 flex items-center gap-3">
-              <ShoppingBag className="w-6 h-6 text-indigo-600" />
+            <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+              <ShoppingBag className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               {t('cart.title')}
             </DialogTitle>
           </DialogHeader>
@@ -88,38 +88,38 @@ const Cart = () => {
           <div className="py-6 space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-hide">
             {items.length === 0 ? (
               <div className="text-center py-12 space-y-4">
-                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
-                  <ShoppingCart className="w-10 h-10 text-slate-300" />
+                <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto">
+                  <ShoppingCart className="w-10 h-10 text-slate-300 dark:text-slate-500" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-800">{t('cart.empty')}</h3>
-                  <p className="text-slate-500 text-sm">{t('cart.emptySubtitle')}</p>
+                  <h3 className="text-lg font-bold text-slate-800 dark:text-white">{t('cart.empty')}</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm">{t('cart.emptySubtitle')}</p>
                 </div>
               </div>
             ) : (
               <div className="space-y-4">
                 {items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 group">
+                  <div key={item.id} className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 group">
                     <img src={item.image} alt={item.name} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
                     <div className="grow">
-                      <h4 className="font-bold text-slate-900 leading-tight">{item.name}</h4>
-                      <p className="text-indigo-600 font-black text-sm">${item.price}</p>
+                      <h4 className="font-bold text-slate-900 dark:text-white leading-tight">{item.name}</h4>
+                      <p className="text-indigo-600 dark:text-indigo-400 font-black text-sm">${item.price}</p>
 
                       <div className="flex items-center gap-3 mt-2">
-                        <div className="flex items-center bg-white rounded-lg border border-slate-200 px-1 py-1 shadow-sm">
+                        <div className="flex items-center bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 px-1 py-1 shadow-sm">
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-1 hover:text-indigo-600 transition-colors cursor-pointer"
+                            className="p-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-8 text-center text-xs font-black">{item.quantity}</span>
+                          <span className="w-8 text-center text-xs font-black text-foreground dark:text-white">{item.quantity}</span>
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             disabled={item.quantity >= item.stock}
-                            className="p-1 hover:text-indigo-600 transition-colors cursor-pointer disabled:opacity-30"
+                            className="p-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer disabled:opacity-30"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -127,14 +127,14 @@ const Cart = () => {
                         <button
                           type="button"
                           onClick={() => handleDeleteClick(item)}
-                          className="text-slate-400 hover:text-red-500 transition-colors cursor-pointer"
+                          className="text-slate-400 dark:text-slate-500 hover:text-red-500 transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-black text-slate-900">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="font-black text-slate-900 dark:text-white">${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 ))}
@@ -143,10 +143,10 @@ const Cart = () => {
           </div>
 
           {items.length > 0 && (
-            <div className="pt-6 border-t border-slate-100 space-y-4">
+            <div className="pt-6 border-t border-slate-100 dark:border-slate-700 space-y-4">
               <div className="flex justify-between items-center px-2">
-                <span className="text-slate-500 font-bold">{t('cart.subtotal')}</span>
-                <span className="text-2xl font-black text-slate-900">${total.toFixed(2)}</span>
+                <span className="text-slate-500 dark:text-slate-400 font-bold">{t('cart.subtotal')}</span>
+                <span className="text-2xl font-black text-slate-900 dark:text-white">${total.toFixed(2)}</span>
               </div>
               <Button
                 onClick={() => setIsCheckoutOpen(true)}

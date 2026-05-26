@@ -54,17 +54,17 @@ export function ConfirmDialog({
 
       {/* Dialog Container */}
       <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
-        <div className="relative w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-in fade-in zoom-in duration-300 pointer-events-auto">
+        <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-100 dark:border-slate-700 animate-in fade-in zoom-in duration-300 pointer-events-auto">
 
           <div className="flex flex-col space-y-2 text-center sm:text-left">
-            <h2 className="text-lg font-semibold leading-none tracking-tight">{finalTitle}</h2>
-            <p className="text-sm text-slate-500">{finalDescription}</p>
+            <h2 className="text-lg font-semibold leading-none tracking-tight text-foreground dark:text-white">{finalTitle}</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{finalDescription}</p>
           </div>
 
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 mt-4">
             <button
               type="button"
-              className="mt-2 sm:mt-0 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-100 hover:text-slate-900 transition-colors disabled:opacity-50 cursor-pointer"
+              className="mt-2 sm:mt-0 inline-flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors disabled:opacity-50 cursor-pointer"
               onClick={onClose}
               disabled={isLoading}
             >

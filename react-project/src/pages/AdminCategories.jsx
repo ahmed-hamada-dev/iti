@@ -77,7 +77,7 @@ const AdminCategories = () => {
     <div className="p-8">
       <button 
         onClick={() => navigate('/dashboard')}
-        className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors mb-6 group font-bold text-sm"
+        className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-6 group font-bold text-sm"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         {t('admin.categories.backToDashboard')}
@@ -85,8 +85,8 @@ const AdminCategories = () => {
 
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">{t('admin.categories.title')}</h1>
-          <p className="text-slate-500">{t('admin.categories.subtitle')}</p>
+          <h1 className="text-3xl font-bold text-foreground dark:text-white">{t('admin.categories.title')}</h1>
+          <p className="text-slate-500 dark:text-slate-400">{t('admin.categories.subtitle')}</p>
         </div>
         
         <Button onClick={() => handleOpenDialog()} className="bg-slate-900 hover:bg-slate-800 text-white gap-2 h-11 px-6 rounded-xl">
@@ -103,10 +103,10 @@ const AdminCategories = () => {
 
       <div className="flex items-center gap-4 mb-6">
         <div className="relative grow max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
           <Input 
             placeholder={t('admin.categories.searchPlaceholder')} 
-            className="pl-10 h-11 bg-white"
+            className="pl-10 h-11 bg-white dark:bg-slate-800"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
@@ -116,48 +116,48 @@ const AdminCategories = () => {
       <div key={debouncedSearch} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {isLoading ? (
           <div className="col-span-full py-12 text-center">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-8 h-8 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
-              <p className="text-slate-500 font-medium">{t('admin.categories.scanning')}</p>
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-8 h-8 border-4 border-slate-200 dark:border-slate-700 border-t-indigo-500 dark:border-t-indigo-400 rounded-full animate-spin" />
+                <p className="text-slate-500 dark:text-slate-400 font-medium">{t('admin.categories.scanning')}</p>
+              </div>
             </div>
-          </div>
-        ) : !categories?.length ? (
-          <div className="col-span-full py-12 text-center text-slate-500 font-bold">
-            {t('admin.categories.noCategories')}
-          </div>
-        ) : (
-          categories.map((category, index) => (
-            <div 
-              key={category.id} 
-              className={`bg-white p-6 rounded-2xl border border-slate-200 flex items-center justify-between group hover:shadow-lg hover:shadow-slate-200/50 transition-all animate-fade-in stagger-${(index % 5) + 1}`}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-                   <Tag className="w-6 h-6" />
+          ) : !categories?.length ? (
+            <div className="col-span-full py-12 text-center text-slate-500 dark:text-slate-400 font-bold">
+              {t('admin.categories.noCategories')}
+            </div>
+          ) : (
+            categories.map((category, index) => (
+              <div 
+                key={category.id} 
+                className={`bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between group hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50 transition-all animate-fade-in stagger-${(index % 5) + 1}`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                     <Tag className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-slate-800 dark:text-white text-lg">{category.name}</span>
                 </div>
-                <span className="font-bold text-slate-800 text-lg">{category.name}</span>
+                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => handleOpenDialog(category)}
+                    className="text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-xl"
+                  >
+                    <Edit className="w-5 h-5" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => handleDeleteClick(category.id)}
+                    className="text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xl"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  onClick={() => handleOpenDialog(category)}
-                  className="text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl"
-                >
-                  <Edit className="w-5 h-5" />
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  onClick={() => handleDeleteClick(category.id)}
-                  className="text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
       </div>
 
       <ConfirmDialog 

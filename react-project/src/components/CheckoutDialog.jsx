@@ -21,10 +21,10 @@ export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md bg-white rounded-3xl p-8">
+      <DialogContent className="max-w-md bg-white dark:bg-slate-900 rounded-3xl p-8">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-black text-slate-900">{t('checkout.title')}</DialogTitle>
-          <p className="text-slate-500 font-medium">{t('checkout.subtitle')}</p>
+          <DialogTitle className="text-2xl font-black text-foreground dark:text-white">{t('checkout.title')}</DialogTitle>
+          <p className="text-slate-500 dark:text-slate-400 font-medium">{t('checkout.subtitle')}</p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
@@ -74,9 +74,9 @@ export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
             />
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
-            <span className="text-slate-500 font-bold text-sm uppercase">{t('checkout.totalAmount')}</span>
-            <span className="text-2xl font-black text-slate-900">${total.toFixed(2)}</span>
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+            <span className="text-slate-500 dark:text-slate-400 font-bold text-sm uppercase">{t('checkout.totalAmount')}</span>
+            <span className="text-2xl font-black text-foreground dark:text-white">${total.toFixed(2)}</span>
           </div>
 
           <DialogFooter className="pt-4">
