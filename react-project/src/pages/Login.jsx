@@ -82,6 +82,7 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder={t('auth.login.placeholder.email')}
                 required
+                maxLength={120}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
@@ -95,6 +96,7 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder={t('auth.login.placeholder.password')}
                 required
+                maxLength={128}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>

@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useTranslation } from 'react-i18next';
 
-export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
+export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total, user, error }) {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
@@ -13,10 +13,15 @@ export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
     address: '',
     phone: ''
   });
+  const shouldUseAccountInfo = Boolean(user?.name && user?.email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onConfirm(formData);
+    onConfirm({
+      ...formData,
+      name: shouldUseAccountInfo ? user.name : formData.name,
+      email: shouldUseAccountInfo ? user.email : formData.email,
+    });
   };
 
   return (
@@ -28,34 +33,49 @@ export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="name" className="font-bold">{t('checkout.fullName')}</Label>
-            <Input 
-              id="name" 
-              required 
-              placeholder={t('checkout.placeholders.name')} 
-              value={formData.name}
-              onChange={e => setFormData({...formData, name: e.target.value})}
-              className="h-12"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email" className="font-bold">{t('checkout.emailAddress')}</Label>
-            <Input 
-              id="email" 
-              type="email" 
-              required 
-              placeholder={t('checkout.placeholders.email')} 
-              value={formData.email}
-              onChange={e => setFormData({...formData, email: e.target.value})}
-              className="h-12"
-            />
-          </div>
+          {error && (
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+              {error}
+            </div>
+          )}
+
+          {!shouldUseAccountInfo && (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="name" className="font-bold">{t('checkout.fullName')}</Label>
+                <Input
+                  id="name"
+                  required
+                  minLength={2}
+                  maxLength={80}
+                  placeholder={t('checkout.placeholders.name')}
+                  value={formData.name}
+                  onChange={e => setFormData({...formData, name: e.target.value})}
+                  className="h-12"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="font-bold">{t('checkout.emailAddress')}</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  required
+                  maxLength={120}
+                  placeholder={t('checkout.placeholders.email')}
+                  value={formData.email}
+                  onChange={e => setFormData({...formData, email: e.target.value})}
+                  className="h-12"
+                />
+              </div>
+            </>
+          )}
           <div className="space-y-2">
             <Label htmlFor="address" className="font-bold">{t('checkout.shippingAddress')}</Label>
             <Input 
               id="address" 
-              required 
+              required
+              minLength={10}
+              maxLength={200}
               placeholder={t('checkout.placeholders.address')} 
               value={formData.address}
               onChange={e => setFormData({...formData, address: e.target.value})}
@@ -66,7 +86,10 @@ export function CheckoutDialog({ isOpen, onOpenChange, onConfirm, total }) {
             <Label htmlFor="phone" className="font-bold">{t('checkout.phoneNumber')}</Label>
             <Input 
               id="phone" 
+              type="tel"
               required 
+              minLength={11}
+              maxLength={13}
               placeholder={t('checkout.placeholders.phone')} 
               value={formData.phone}
               onChange={e => setFormData({...formData, phone: e.target.value})}

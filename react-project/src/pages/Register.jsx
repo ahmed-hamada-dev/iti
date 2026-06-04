@@ -31,7 +31,11 @@ const Register = () => {
         navigate('/');
       },
       onError: (err) => {
-        setError(err.response?.data?.message || t('auth.errors.registrationFailed'));
+        if (err.message === 'Email already registered' || err.response?.data?.message === 'Email already registered') {
+          setError(t('auth.errors.emailExists') || 'Email already registered');
+        } else {
+          setError(err.response?.data?.message || t('auth.errors.registrationFailed'));
+        }
       },
     });
   };
@@ -73,7 +77,7 @@ const Register = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
+            <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.name')}</label>
               <input
                 type="text"
@@ -82,10 +86,12 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder={t('auth.register.placeholder.name')}
                 required
+                minLength={2}
+                maxLength={80}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
- 
+
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.email')}</label>
               <input
@@ -95,10 +101,11 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder={t('auth.register.placeholder.email')}
                 required
+                maxLength={120}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
- 
+
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('auth.register.password')}</label>
               <input
@@ -108,10 +115,12 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder={t('auth.register.placeholder.password')}
                 required
+                minLength={6}
+                maxLength={128}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
               />
             </div>
- 
+
             <button
               type="submit"
               disabled={registerMutation.isPending}

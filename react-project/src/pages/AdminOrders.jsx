@@ -6,12 +6,10 @@ import { Button } from '@/components/ui/button';
 import OrderStatusBadge from '../components/admin/OrderStatusBadge';
 import OrderDetailsDialog from '../components/admin/OrderDetailsDialog';
 import { useDebounce } from '../hooks/useDebounce';
-import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 
 const AdminOrders = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
@@ -99,7 +97,7 @@ const AdminOrders = () => {
                   className={`hover:bg-slate-50/50 transition-colors group animate-fade-in stagger-${(index % 5) + 1}`}
                 >
                   <td className="px-6 py-5">
-                      <span className="font-bold text-slate-900">{t('admin.orders.orderNumber', { id: order.id })}</span>
+                    <span className="font-bold text-slate-900">{t('admin.orders.orderNumber', { id: order.id })}</span>
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex flex-col">

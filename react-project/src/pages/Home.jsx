@@ -27,7 +27,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Hero />
 
       <section className="py-24 px-6 relative z-20 bg-slate-50 -mt-20 rounded-t-[3rem]">
         <div className="max-w-7xl mx-auto space-y-12">

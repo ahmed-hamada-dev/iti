@@ -123,6 +123,8 @@
     "phoneNumber": "رقم الهاتف",
     "totalAmount": "المبلغ الإجمالي",
     "placeOrder": "تأكيد الطلب الكوني",
+    "orderFailed": "تعذر تأكيد الطلب. يرجى المحاولة مرة أخرى.",
+    "insufficientStock": "المخزون غير كافٍ للمنتج {{itemName}}. الكمية المتاحة: {{count}}.",
     "placeholders": {
       "name": "أحمد محمد",
       "email": "ahmed@example.com",

@@ -41,14 +41,19 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             <Input 
               value={formData.name} 
               onChange={e => setFormData({...formData, name: e.target.value})} 
-              required 
+              required
+              minLength={2}
+              maxLength={120}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">{t('admin.products.price')}</label>
               <Input 
-                type="number" step="0.01" 
+                type="number"
+                step="0.01"
+                min="0.01"
+                max="999999"
                 value={formData.price} 
                 onChange={e => setFormData({...formData, price: e.target.value})} 
                 required 
@@ -57,7 +62,9 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             <div className="space-y-2">
               <label className="text-sm font-medium">{t('admin.products.stock')}</label>
               <Input 
-                type="number" 
+                type="number"
+                min="0"
+                max="9999"
                 value={formData.stock} 
                 onChange={e => setFormData({...formData, stock: e.target.value})} 
                 required 
@@ -81,7 +88,8 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             <Input 
               value={formData.image} 
               onChange={e => setFormData({...formData, image: e.target.value})} 
-              required 
+              required
+              maxLength={500}
             />
           </div>
           <div className="space-y-2">
@@ -89,7 +97,9 @@ const ProductFormDialog = ({ open, onOpenChange, onSubmit, initialData, categori
             <Textarea 
               value={formData.description} 
               onChange={e => setFormData({...formData, description: e.target.value})} 
-              required 
+              required
+              minLength={10}
+              maxLength={1000}
             />
           </div>
           <DialogFooter>

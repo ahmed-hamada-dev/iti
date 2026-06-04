@@ -16,7 +16,7 @@
       "category": "Electronics",
       "description": "RGB backlit mechanical keyboard with blue switches for tactile feedback.",
       "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800&auto=format&fit=crop&q=60",
-      "stock": 8
+      "stock": 7
     },
     {
       "id": "3",
@@ -43,7 +43,7 @@
       "category": "Electronics",
       "description": "test",
       "image": "https:123",
-      "stock": 2,
+      "stock": 3,
       "rating": 5
     },
     {
@@ -54,6 +54,15 @@
       "description": "test\n test",
       "image": "https://2b.com.eg/media/catalog/product/cache/d33f1c152d6eb7e8608a208d80f21a14/m/a/ma215_1_2_1_2.jpg",
       "stock": 2
+    },
+    {
+      "name": "test",
+      "price": 0.06,
+      "category": "Electronics",
+      "description": "gfdgdsgdsgdsg",
+      "image": "https:",
+      "stock": 0,
+      "id": "D2z989V"
     }
   ],
   "categories": [
@@ -144,6 +153,16 @@
           "image": "https:123",
           "stock": 2,
           "quantity": 2
+        },
+        {
+          "id": "1",
+          "name": "Nebula Wireless Headphones",
+          "price": 199.99,
+          "category": "Electronics",
+          "description": "Immersive sound with active noise cancellation and 40-hour battery life.",
+          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60",
+          "stock": 15,
+          "quantity": 1
         }
       ]
     },
@@ -201,254 +220,71 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "name": "test55",
+      "email": "test55@gmail.com",
+      "password": "123456789Aa*",
+      "role": "User",
+      "id": "i4MJ1E6"
+    },
+    {
+      "name": "test2000",
+      "email": "test2000@gmail.com",
+      "password": "123456789Aa*",
+      "role": "User",
+      "id": "GzDt3Kb",
+      "cart": []
     }
   ],
   "orders": [
     {
-      "id": "1001",
-      "userId": "2",
-      "items": [
-        {
-          "name": "Nebula Wireless Headphones",
-          "price": 199.99,
-          "quantity": 1
-        }
-      ],
-      "total": 199.99,
-      "status": "On way",
-      "createdAt": "2026-04-26T10:00:00Z"
-    },
-    {
-      "id": "1002",
-      "userId": "2",
-      "items": [
-        {
-          "name": "Galaxy Gaming Mouse",
-          "price": 79.99,
-          "quantity": 2
-        }
-      ],
-      "total": 159.98,
-      "status": "On way",
-      "createdAt": "2026-04-25T14:30:00Z"
-    },
-    {
-      "id": "1003",
-      "userId": "2",
-      "items": [
-        {
-          "name": "Starlight Smart Watch",
-          "price": 299.99,
-          "quantity": 1
-        }
-      ],
-      "total": 299.99,
-      "status": "Pending",
-      "createdAt": "2026-04-22T09:15:00Z"
-    },
-    {
-      "id": "ada2",
-      "userId": "user-123",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 4
-        }
-      ],
-      "total": 599.96,
-      "status": "Pending",
-      "createdAt": "2026-05-07T20:20:10.489Z"
-    },
-    {
-      "id": "1191",
-      "userId": "user-123",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 6
-        }
-      ],
-      "total": 899.94,
-      "status": "Pending",
-      "createdAt": "2026-05-07T20:21:18.487Z"
-    },
-    {
-      "id": "ccb1",
-      "userId": "user-123",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "total": 149.99,
-      "status": "Pending",
-      "createdAt": "2026-05-07T20:21:30.400Z"
-    },
-    {
-      "id": "f6a4",
-      "userId": "1",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 8
-        }
-      ],
-      "total": 1199.92,
-      "status": "Pending",
-      "createdAt": "2026-05-07T20:24:49.887Z"
-    },
-    {
-      "id": "2535",
-      "userId": "1",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "1",
-          "name": "Nebula Wireless Headphones",
-          "price": 199.99,
-          "quantity": 15
-        }
-      ],
-      "total": 2999.8500000000004,
-      "status": "On way",
-      "createdAt": "2026-05-07T21:08:25.480Z"
-    },
-    {
-      "id": "370f",
-      "userId": "1",
-      "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 2
-        },
-        {
-          "id": "1",
-          "name": "Nebula Wireless Headphones",
-          "price": 199.99,
-          "quantity": 2
-        },
-        {
-          "id": "4",
-          "name": "Galaxy Gaming Mouse",
-          "price": 79.99,
-          "quantity": 25
-        },
-        {
-          "id": "3",
-          "name": "Starlight Smart Watch",
-          "price": 299.99,
-          "quantity": 1
-        }
-      ],
-      "total": 2999.7,
-      "status": "Pending",
-      "createdAt": "2026-05-07T21:21:50.140Z"
-    },
-    {
-      "id": "5471",
       "userId": "2de8",
       "customer": {
-        "name": "Ahmed Hamada Ahmed",
-        "email": "ahmedha258258@gmail.com",
-        "address": "Assiut",
-        "phone": "+201060257232"
+        "name": "Ahmed Hamada",
+        "email": "user@gmail.com",
+        "address": "فثسف فثسفيبالب",
+        "phone": "01060257232"
       },
       "items": [
         {
           "id": "2",
           "name": "Cosmic Mechanical Keyboard",
           "price": 149.99,
-          "quantity": 8
+          "quantity": 1
         },
         {
-          "id": "7bd7",
-          "name": "ihpone 17",
-          "price": 500,
+          "id": "d2a4",
+          "name": "test",
+          "price": 1.5,
           "quantity": 2
         }
       ],
-      "total": 2199.92,
-      "status": "On way",
-      "createdAt": "2026-05-07T21:50:24.433Z"
+      "total": 152.99,
+      "status": "Pending",
+      "createdAt": "2026-05-23T07:37:22.165Z",
+      "id": "NcRibTh"
     },
     {
-      "userId": "kyr2TDs",
+      "userId": "GzDt3Kb",
       "customer": {
-        "name": "Amr",
-        "email": "amr@gmail.com",
-        "address": "Sohag",
-        "phone": "01063981425"
+        "name": "test2000",
+        "email": "test2000@gmail.com",
+        "address": "tests test tsetrst",
+        "phone": "01021023101"
       },
       "items": [
         {
-          "id": "1",
-          "name": "Nebula Wireless Headphones",
-          "price": 199.99,
-          "quantity": 1
-        },
-        {
-          "id": "2",
-          "name": "Cosmic Mechanical Keyboard",
-          "price": 149.99,
-          "quantity": 1
-        },
-        {
-          "id": "3",
-          "name": "Starlight Smart Watch",
-          "price": 299.99,
-          "quantity": 9
+          "id": "D2z989V",
+          "name": "test",
+          "price": 0.06,
+          "quantity": 2
         }
       ],
-      "total": 3049.89,
-      "status": "Pending",
-      "createdAt": "2026-05-16T12:20:49.831Z",
-      "id": "u3VcgJp"
+      "total": 0.12,
+      "status": "Delivered",
+      "createdAt": "2026-05-23T08:09:31.162Z",
+      "id": "qHt5TGT"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

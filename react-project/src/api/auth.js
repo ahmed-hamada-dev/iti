@@ -2,6 +2,19 @@ import api from './axios';
 import Cookies from 'js-cookie';
 
 export const register = async (userData) => {
+  // Check if email already exists
+  const existingUsers = await api.get('/users', {
+    params: {
+      email: userData.email
+    }
+  });
+
+  if (existingUsers.data && existingUsers.data.length > 0) {
+    const error = new Error('Email already registered');
+    error.response = { data: { message: 'Email already registered' } };
+    throw error;
+  }
+
   const response = await api.post('/users', { ...userData, role: 'User' });
   const user = response.data;
   Cookies.set('accessToken', 'mock-token', { expires: 7 });
@@ -11,13 +24,13 @@ export const register = async (userData) => {
 
 export const login = async (credentials) => {
   // Search for user by email and password in json-server
-  const response = await api.get('/users', { 
-    params: { 
-      email: credentials.email, 
-      password: credentials.password 
-    } 
+  const response = await api.get('/users', {
+    params: {
+      email: credentials.email,
+      password: credentials.password
+    }
   });
-  
+
   const user = response.data[0];
   if (user) {
     Cookies.set('accessToken', 'mock-token', { expires: 7 });

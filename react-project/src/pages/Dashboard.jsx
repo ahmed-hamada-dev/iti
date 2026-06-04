@@ -49,7 +49,7 @@ const Dashboard = () => {
           <Sidebar user={user} logout={logout} />
 
           {/* Main Content */}
-          <main className="flex-grow">
+          <main className="grow">
             <div className="bg-white rounded-3xl border border-slate-200 p-8 min-h-[600px] shadow-sm">
               <div className="flex justify-between items-center mb-8">
                 <h1 className="text-2xl font-black text-slate-900">{t('dashboard.title')}</h1>

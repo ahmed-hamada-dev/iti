@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getCurrentUser } from '../api/auth';
 import api from '../api/axios';
 
-// Use a simple global state pattern for the cart
+
 let cartState = JSON.parse(localStorage.getItem('cart') || '[]');
 const listeners = new Set();
 

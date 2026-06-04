@@ -22,8 +22,12 @@ export const useCreateOrder = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createOrder,
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['orders'] });
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      variables.items.forEach((item) => {
+        queryClient.invalidateQueries({ queryKey: ['product', item.id] });
+      });
     },
   });
 };

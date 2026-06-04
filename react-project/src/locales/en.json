@@ -123,6 +123,8 @@
     "phoneNumber": "Phone Number",
     "totalAmount": "Total Amount",
     "placeOrder": "Place Cosmic Order",
+    "orderFailed": "Could not place the order. Please try again.",
+    "insufficientStock": "Not enough stock for {{itemName}}. Available quantity: {{count}}.",
     "placeholders": {
       "name": "John Doe",
       "email": "john@example.com",

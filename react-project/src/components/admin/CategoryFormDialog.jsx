@@ -34,7 +34,9 @@ const CategoryFormDialog = ({ open, onOpenChange, onSubmit, initialData }) => {
               placeholder={t('admin.categories.placeholder')}
               value={name} 
               onChange={e => setName(e.target.value)} 
-              required 
+              required
+              minLength={2}
+              maxLength={80}
             />
           </div>
           <DialogFooter>

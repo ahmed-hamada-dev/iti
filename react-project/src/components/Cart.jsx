@@ -25,6 +25,7 @@ const Cart = () => {
 
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
 
   const handleDeleteClick = (item) => {
     setConfirmDelete({
@@ -40,6 +41,7 @@ const Cart = () => {
   };
 
   const handleCheckoutConfirm = (userData) => {
+    setCheckoutError('');
     const orderData = {
       userId: user?.id,
       customer: userData,
@@ -55,11 +57,22 @@ const Cart = () => {
     };
 
     createOrder.mutate(orderData, {
-      onSuccess: () => {
-        clearCart();
+      onSuccess: async () => {
+        await clearCart();
         setIsCheckoutOpen(false);
         setIsCartOpen(false);
         navigate('/dashboard');
+      },
+      onError: (error) => {
+        const errorData = error.response?.data;
+        if (errorData?.code === 'INSUFFICIENT_STOCK') {
+          setCheckoutError(t('checkout.insufficientStock', {
+            itemName: errorData.productName,
+            count: errorData.availableStock,
+          }));
+        } else {
+          setCheckoutError(t('checkout.orderFailed'));
+        }
       }
     });
   };
@@ -149,7 +162,10 @@ const Cart = () => {
                 <span className="text-2xl font-black text-slate-900">${total.toFixed(2)}</span>
               </div>
               <Button
-                onClick={() => setIsCheckoutOpen(true)}
+                onClick={() => {
+                  setCheckoutError('');
+                  setIsCheckoutOpen(true);
+                }}
                 className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black h-14 rounded-2xl text-lg shadow-xl shadow-slate-900/10 cursor-pointer"
               >
                 {t('cart.checkout')}
@@ -174,6 +190,8 @@ const Cart = () => {
         onOpenChange={setIsCheckoutOpen}
         onConfirm={handleCheckoutConfirm}
         total={total}
+        user={user}
+        error={checkoutError}
       />
     </>
   );
