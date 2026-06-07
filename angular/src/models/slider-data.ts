@@ -3,10 +3,9 @@ export class SliderData {
 
   constructor() {
     this.images = [
-      'https://picsum.photos/id/1018/1200/500',
-      'https://picsum.photos/id/1015/1200/500',
-      'https://picsum.photos/id/1019/1200/500',
-      'https://picsum.photos/id/1016/1200/500',
+      'https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/1.webp',
+      'https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/1.webp',
+      'https://cdn.dummyjson.com/product-images/groceries/ice-cream/1.webp',
     ];
   }
 }
