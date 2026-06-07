@@ -1,0 +1,29 @@
+.detail-image-wrap {
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #f8f9fa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 16px;
+  transform-origin: center center;
+}
+
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode .text-muted {
+  color: #e5e7eb !important;
+}
+
+body.dark-mode .detail-image-wrap {
+  background: #111827;
+}

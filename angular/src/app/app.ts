@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Header } from '../components/header/header';
-import { Slider } from '../components/slider/slider';
+import { RouterOutlet } from '@angular/router';
 
-//? Decorator DP --> add new property in
 @Component({
   selector: 'app-root',
-  imports: [Header, Slider],
+  imports: [Header, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

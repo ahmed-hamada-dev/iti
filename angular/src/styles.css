@@ -1,2 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
 
+body {
+  background-color: #f5f7fa;
+  color: #212529;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #111827;
+  color: #e5e7eb;
+}
+
+body.dark-mode .navbar {
+  background-color: #1f2937 !important;
+}
+
+body.dark-mode .navbar .nav-link,
+body.dark-mode .navbar .navbar-brand {
+  color: #e5e7eb;
+}
+
+body.dark-mode .card {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+body.dark-mode .btn-outline-secondary {
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+body.dark-mode .alert-warning {
+  background-color: #78350f;
+  color: #fef3c7;
+  border-color: #92400e;
+}

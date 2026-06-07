@@ -1,0 +1,63 @@
+<div class="card product-card h-100 shadow-sm">
+  <div class="product-image-wrap">
+    <img
+      [src]="product.image"
+      [alt]="product.title"
+      class="card-img-top product-image"
+      appImageZoom
+      zoomScale="1.2"
+    />
+    @if (product.discountPercentage > 0) {
+      <span class="discount-badge">
+        -{{ product.discountPercentage | number:'1.0-0' }}%
+      </span>
+    }
+  </div>
+
+  <div class="card-body d-flex flex-column">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [id]="'sel-' + product.id"
+        [checked]="isSelected"
+        (change)="onSelect()"
+      />
+      <label class="form-check-label" [for]="'sel-' + product.id">
+        Select
+      </label>
+    </div>
+
+    <h5 class="card-title">{{ product.title }}</h5>
+    <h6 class="text-primary mb-2">${{ product.price }}</h6>
+    <p class="text-muted small mb-2">{{ product.brand || 'No brand' }} | {{ product.category }}</p>
+
+    <p class="card-text small">
+      {{ (showFull ? product.description : (product.description | shortDescription)) }}
+    </p>
+    <button
+      type="button"
+      class="btn btn-link btn-sm p-0 mb-2 text-decoration-none"
+      (click)="toggleDescription()"
+    >
+      {{ showFull ? 'Hide Description' : 'See All Description' }}
+    </button>
+
+    <div class="mt-auto">
+      @if (product.stock > 0) {
+        <span class="badge bg-success mb-2">In Stock ({{ product.stock }})</span>
+      } @else {
+        <span class="badge bg-danger mb-2">Out Of Stock</span>
+      }
+
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        [disabled]="product.stock <= 0 || isBought"
+        (click)="onBuy()"
+      >
+        {{ isBought ? 'Bought' : 'Buy' }}
+      </button>
+    </div>
+  </div>
+</div>
