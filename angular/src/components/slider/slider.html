@@ -1,0 +1,25 @@
+<div class="slider">
+  <div class="slider-frame">
+    <img
+      [src]="slider.images[currentIndex]"
+      alt="slider image"
+      class="slider-img"
+    />
+  </div>
+
+  <div class="slider-controls">
+    <button class="btn btn-primary" (click)="display()">Display</button>
+    <button class="btn btn-danger" (click)="stop()">Stop</button>
+    <button class="btn btn-success" (click)="next()">Next</button>
+    <button class="btn btn-warning" (click)="prev()">Previous</button>
+  </div>
+
+  <p class="slider-status">
+    Image {{ currentIndex + 1 }} of {{ slider.images.length }}
+    @if (isPlaying) {
+      <span class="badge bg-success ms-2">Playing</span>
+    } @else {
+      <span class="badge bg-secondary ms-2">Stopped</span>
+    }
+  </p>
+</div>
