@@ -1,14 +1,17 @@
-<div class="card product-card h-100 shadow-sm">
-  <div class="product-image-wrap">
+<div class="card h-100 shadow-sm border-0 rounded-xl transition-shadow hover:shadow-lg" style="transition: transform 0.2s ease, box-shadow 0.2s ease">
+  <div class="position-relative w-100 overflow-hidden bg-light" style="height: 220px">
     <img
       [src]="product.image"
       [alt]="product.title"
-      class="card-img-top product-image"
+      class="w-100 h-100 object-contain p-2"
+      style="transform-origin: center"
       appImageZoom
       zoomScale="1.2"
     />
     @if (product.discountPercentage > 0) {
-      <span class="discount-badge">
+      <span
+        class="position-absolute top-0 start-0 bg-danger text-white fw-bold small px-2 py-1 rounded-pill shadow-sm m-2"
+      >
         -{{ product.discountPercentage | number:'1.0-0' }}%
       </span>
     }

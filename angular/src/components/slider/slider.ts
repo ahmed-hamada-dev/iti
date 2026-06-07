@@ -1,13 +1,12 @@
-import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 import { SliderData } from '../../models/slider-data';
 
 @Component({
   selector: 'app-slider',
   imports: [],
   templateUrl: './slider.html',
-  styleUrl: './slider.css',
 })
-export class Slider implements OnDestroy {
+export class Slider implements OnInit, OnDestroy {
   slider: SliderData;
   currentIndex: number = 0;
   isPlaying: boolean = false;
@@ -18,16 +17,52 @@ export class Slider implements OnDestroy {
     this.slider = new SliderData();
   }
 
-  display(): void {
-    this.stop();
-    this.isPlaying = true;
-    this.next();
-    this.intervalId = window.setInterval(() => {
-      this.next();
-    }, 1500);
+  ngOnInit(): void {
+    this.startAutoPlay();
   }
 
-  stop(): void {
+  ngOnDestroy(): void {
+    this.stopAutoPlay();
+  }
+
+  next(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.slider.images.length;
+    if (this.isPlaying) this.resetAutoPlay();
+    this.cdr.detectChanges();
+  }
+
+  prev(): void {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.slider.images.length) % this.slider.images.length;
+    if (this.isPlaying) this.resetAutoPlay();
+    this.cdr.detectChanges();
+  }
+
+  goTo(index: number): void {
+    this.currentIndex = index;
+    if (this.isPlaying) this.resetAutoPlay();
+    this.cdr.detectChanges();
+  }
+
+  togglePlay(): void {
+    if (this.isPlaying) {
+      this.stopAutoPlay();
+    } else {
+      this.startAutoPlay();
+    }
+    this.cdr.detectChanges();
+  }
+
+  private startAutoPlay(): void {
+    this.stopAutoPlay();
+    this.isPlaying = true;
+    this.intervalId = window.setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.slider.images.length;
+      this.cdr.detectChanges();
+    }, 3000);
+  }
+
+  private stopAutoPlay(): void {
     this.isPlaying = false;
     if (this.intervalId !== null) {
       window.clearInterval(this.intervalId);
@@ -35,18 +70,8 @@ export class Slider implements OnDestroy {
     }
   }
 
-  next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.slider.images.length;
-    this.cdr.detectChanges();
-  }
-
-  prev(): void {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.slider.images.length) % this.slider.images.length;
-    this.cdr.detectChanges();
-  }
-
-  ngOnDestroy(): void {
-    this.stop();
+  private resetAutoPlay(): void {
+    this.stopAutoPlay();
+    this.startAutoPlay();
   }
 }

@@ -8,7 +8,6 @@ import { ImageZoomDirective } from '../../directives/image-zoom.directive';
   selector: 'app-product-card',
   imports: [ShortDescriptionPipe, ImageZoomDirective, DecimalPipe],
   templateUrl: './product-card.html',
-  styleUrl: './product-card.css',
 })
 export class ProductCard {
   @Input() product!: Product;

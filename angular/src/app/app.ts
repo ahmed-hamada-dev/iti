@@ -7,6 +7,5 @@ import { Products } from '../components/products/products';
   selector: 'app-root',
   imports: [Header, Slider, Products],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {}

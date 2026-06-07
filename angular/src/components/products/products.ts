@@ -8,7 +8,6 @@ import { ProductCard } from '../product-card/product-card';
   selector: 'app-products',
   imports: [ProductCard],
   templateUrl: './products.html',
-  styleUrl: './products.css',
 })
 export class Products implements OnInit, OnDestroy {
   products: Product[];
