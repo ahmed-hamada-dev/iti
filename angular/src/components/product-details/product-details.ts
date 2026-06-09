@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product, ProductsData } from '../../models/products-data';
+import { Product } from '../../models/products-data';
+import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { ImageZoomDirective } from '../../directives/image-zoom.directive';
 import { ShortDescriptionPipe } from '../../pipes/short-description.pipe';
@@ -17,21 +18,25 @@ export class ProductDetails implements OnInit, OnDestroy {
   showFull: boolean = false;
 
   private route = inject(ActivatedRoute);
-  private data = new ProductsData();
+  private productService = inject(ProductService);
   private cart = inject(CartService);
   private cdr = inject(ChangeDetectorRef);
-  private sub!: Subscription;
+  private subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.sub = this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get('id'));
-      this.product = this.data.getById(id);
-      this.cdr.detectChanges();
-    });
+    this.subs.push(
+      this.route.paramMap.subscribe((params) => {
+        const id = Number(params.get('id'));
+        this.productService.getProductById(id).subscribe((product) => {
+          this.product = product;
+          this.cdr.detectChanges();
+        });
+      }),
+    );
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   toggleDescription(): void {

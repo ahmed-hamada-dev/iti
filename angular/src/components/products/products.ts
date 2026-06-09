@@ -11,7 +11,7 @@ import { ProductCard } from '../product-card/product-card';
   templateUrl: './products.html',
 })
 export class Products implements OnInit, OnDestroy {
-  products: Product[];
+  products: Product[] = [];
   total: number = 0;
 
   searchTerm: string = '';
@@ -24,21 +24,23 @@ export class Products implements OnInit, OnDestroy {
   private productService = inject(ProductService);
   private cart = inject(CartService);
   private cdr = inject(ChangeDetectorRef);
-  private sub!: Subscription;
-
-  constructor() {
-    this.products = this.productService.getAllProducts();
-  }
+  private subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.sub = this.cart.total$.subscribe((t) => {
-      this.total = t;
-      this.cdr.detectChanges();
-    });
+    this.subs.push(
+      this.productService.getAllProducts().subscribe((products) => {
+        this.products = products;
+        this.cdr.detectChanges();
+      }),
+      this.cart.total$.subscribe((t) => {
+        this.total = t;
+        this.cdr.detectChanges();
+      }),
+    );
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   get categories(): string[] {
@@ -79,7 +81,10 @@ export class Products implements OnInit, OnDestroy {
   }
 
   onDeleteProduct(id: number): void {
-    this.productService.deleteProduct(id);
+    this.productService.deleteProduct(id).subscribe(() => {
+      this.products = this.products.filter((p) => p.id !== id);
+      this.cdr.detectChanges();
+    });
   }
 
   onSearch(event: Event): void {

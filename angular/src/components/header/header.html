@@ -3,6 +3,14 @@
     <a class="navbar-brand fw-bold" routerLink="/">MyShop</a>
     <div class="d-flex align-items-center gap-3">
       <a class="nav-link" routerLink="/add-product">Add Product</a>
+
+      @if (auth.currentUser$ | async; as user) {
+        <span class="text-muted small">{{ user.name }}</span>
+        <a class="nav-link" routerLink="/" (click)="auth.logout()">Logout</a>
+      } @else {
+        <a class="nav-link" routerLink="/login">Login</a>
+      }
+
       <button
         type="button"
         class="btn btn-outline-secondary min-w-[90px]"
