@@ -61,6 +61,22 @@
       >
         {{ isBought ? 'Bought' : 'Buy' }}
       </button>
+
+      <div class="d-flex gap-2 mt-2">
+        <a
+          class="btn btn-outline-secondary btn-sm flex-fill"
+          [routerLink]="['/edit-product', product.id]"
+        >
+          Edit
+        </a>
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm flex-fill"
+          (click)="onDelete()"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </div>

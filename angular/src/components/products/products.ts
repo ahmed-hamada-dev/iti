@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product, ProductsData } from '../../models/products-data';
+import { Product } from '../../models/products-data';
 import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.service';
 import { ProductCard } from '../product-card/product-card';
 
 @Component({
@@ -20,13 +21,13 @@ export class Products implements OnInit, OnDestroy {
   maxPrice: number | null = null;
   inStockOnly: boolean = false;
 
-  private data = new ProductsData();
+  private productService = inject(ProductService);
   private cart = inject(CartService);
   private cdr = inject(ChangeDetectorRef);
   private sub!: Subscription;
 
   constructor() {
-    this.products = this.data.products;
+    this.products = this.productService.getAllProducts();
   }
 
   ngOnInit(): void {
@@ -75,6 +76,10 @@ export class Products implements OnInit, OnDestroy {
 
   onBuy(product: Product): void {
     this.cart.buy(product);
+  }
+
+  onDeleteProduct(id: number): void {
+    this.productService.deleteProduct(id);
   }
 
   onSearch(event: Event): void {

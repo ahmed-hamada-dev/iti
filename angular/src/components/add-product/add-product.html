@@ -1,0 +1,130 @@
+<div class="container py-4">
+  <a routerLink="/" class="btn btn-link mb-3 ps-0">&larr; Back</a>
+
+  <h2 class="mb-4">{{ isEdit ? 'Edit Product' : 'Add Product' }}</h2>
+
+  <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" class="card p-4 shadow-sm dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700">
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label for="title" class="form-label">Title *</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control"
+          [(ngModel)]="model.title"
+          #title="ngModel"
+          required
+          minlength="3"
+        />
+        @if (submitted && title.invalid) {
+          <div class="text-danger small mt-1">
+            @if (title.errors?.['required']) { Title is required. }
+            @if (title.errors?.['minlength']) { At least 3 characters. }
+          </div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="category" class="form-label">Category *</label>
+        <select
+          id="category"
+          name="category"
+          class="form-select"
+          [(ngModel)]="model.category"
+          #category="ngModel"
+          required
+        >
+          <option value="" disabled>Select category</option>
+          @for (c of categories; track c) {
+            <option [value]="c">{{ c }}</option>
+          }
+        </select>
+        @if (submitted && category.invalid) {
+          <div class="text-danger small mt-1">Category is required.</div>
+        }
+      </div>
+
+      <div class="col-12">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          class="form-control"
+          rows="3"
+          [(ngModel)]="model.description"
+        ></textarea>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <label for="price" class="form-label">Price *</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          class="form-control"
+          [(ngModel)]="model.price"
+          #price="ngModel"
+          required
+          min="0"
+        />
+        @if (submitted && price.invalid) {
+          <div class="text-danger small mt-1">
+            @if (price.errors?.['required']) { Price is required. }
+            @if (price.errors?.['min']) { Must be 0 or more. }
+          </div>
+        }
+      </div>
+
+      <div class="col-6 col-md-3">
+        <label for="stock" class="form-label">Stock *</label>
+        <input
+          type="number"
+          id="stock"
+          name="stock"
+          class="form-control"
+          [(ngModel)]="model.stock"
+          #stock="ngModel"
+          required
+          min="0"
+        />
+        @if (submitted && stock.invalid) {
+          <div class="text-danger small mt-1">
+            @if (stock.errors?.['required']) { Stock is required. }
+            @if (stock.errors?.['min']) { Must be 0 or more. }
+          </div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="brand" class="form-label">Brand</label>
+        <select
+          id="brand"
+          name="brand"
+          class="form-select"
+          [(ngModel)]="model.brand"
+        >
+          <option value="">None</option>
+          @for (b of brands; track b) {
+            <option [value]="b">{{ b }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label for="image" class="form-label">Image URL</label>
+        <input
+          type="url"
+          id="image"
+          name="image"
+          class="form-control"
+          [(ngModel)]="model.image"
+        />
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update Product' : 'Add Product' }}</button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { Product } from '../../models/products-data';
 import { ShortDescriptionPipe } from '../../pipes/short-description.pipe';
@@ -6,7 +7,7 @@ import { ImageZoomDirective } from '../../directives/image-zoom.directive';
 
 @Component({
   selector: 'app-product-card',
-  imports: [ShortDescriptionPipe, ImageZoomDirective, DecimalPipe],
+  imports: [ShortDescriptionPipe, ImageZoomDirective, DecimalPipe, RouterLink],
   templateUrl: './product-card.html',
 })
 export class ProductCard {
@@ -16,6 +17,7 @@ export class ProductCard {
 
   @Output() select = new EventEmitter<number>();
   @Output() buy = new EventEmitter<Product>();
+  @Output() delete = new EventEmitter<number>();
 
   showFull: boolean = false;
 
@@ -33,5 +35,9 @@ export class ProductCard {
   onBuy(): void {
     if (this.product.stock <= 0 || this.isBought) return;
     this.buy.emit(this.product);
+  }
+
+  onDelete(): void {
+    this.delete.emit(this.product.id);
   }
 }

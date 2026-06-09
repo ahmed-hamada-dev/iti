@@ -22,6 +22,7 @@ export class ThemeDirective implements OnInit {
 
   private applyTheme(mode: ThemeMode): void {
     document.documentElement.setAttribute('data-bs-theme', mode);
+    document.documentElement.classList.toggle('dark', mode === 'dark');
     localStorage.setItem('theme', mode);
   }
 }

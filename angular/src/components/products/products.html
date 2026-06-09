@@ -102,6 +102,7 @@
           [isBought]="isBought(product.id)"
           (select)="onSelect($event)"
           (buy)="onBuy($event)"
+          (delete)="onDeleteProduct($event)"
         ></app-product-card>
       </div>
     } @empty {
