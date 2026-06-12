@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Product } from '../../models/products-data';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -9,48 +8,35 @@ import { ShortDescriptionPipe } from '../../pipes/short-description.pipe';
 
 @Component({
   selector: 'app-product-details',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, ImageZoomDirective, ShortDescriptionPipe],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
-export class ProductDetails implements OnInit, OnDestroy {
-  product?: Product;
-  showFull: boolean = false;
+export class ProductDetails implements OnInit {
+  product = signal<Product | undefined>(undefined);
+  showFull = signal(false);
 
   private route = inject(ActivatedRoute);
-  private productService = inject(ProductService);
-  private cart = inject(CartService);
-  private cdr = inject(ChangeDetectorRef);
-  private subs: Subscription[] = [];
+  protected productService = inject(ProductService);
+  protected cart = inject(CartService);
 
   ngOnInit(): void {
-    this.subs.push(
-      this.route.paramMap.subscribe((params) => {
-        const id = Number(params.get('id'));
-        this.productService.getProductById(id).subscribe((product) => {
-          this.product = product;
-          this.cdr.detectChanges();
-        });
-      }),
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subs.forEach((s) => s.unsubscribe());
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.productService.getProductById(id).subscribe((p) => this.product.set(p));
   }
 
   toggleDescription(): void {
-    this.showFull = !this.showFull;
+    this.showFull.update((v) => !v);
   }
 
   buy(): void {
-    if (this.product) {
-      this.cart.buy(this.product);
-      this.cdr.detectChanges();
-    }
+    const p = this.product();
+    if (p) this.cart.buy(p);
   }
 
-  get isBought(): boolean {
-    return this.product ? this.cart.isBought(this.product.id) : false;
+  isBought(): boolean {
+    const p = this.product();
+    return p ? this.cart.isBought(p.id) : false;
   }
 }

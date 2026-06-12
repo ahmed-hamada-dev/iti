@@ -1,6 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Product } from '../models/products-data';
 
 @Injectable({ providedIn: 'root' })
@@ -8,8 +8,13 @@ export class ProductService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000';
 
+  private productsSignal = signal<Product[]>([]);
+  readonly products = this.productsSignal.asReadonly();
+
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+    return this.http.get<Product[]>(`${this.apiUrl}/products`).pipe(
+      tap((products) => this.productsSignal.set(products)),
+    );
   }
 
   getProductById(id: number): Observable<Product> {
@@ -26,5 +31,9 @@ export class ProductService {
 
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/products/${id}`);
+  }
+
+  removeProductLocally(id: number): void {
+    this.productsSignal.update((list) => list.filter((p) => p.id !== id));
   }
 }

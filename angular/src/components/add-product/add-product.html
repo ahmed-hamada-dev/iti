@@ -1,7 +1,7 @@
 <div class="container py-4">
   <a routerLink="/" class="btn btn-link mb-3 ps-0">&larr; Back</a>
 
-  <h2 class="mb-4">{{ isEdit ? 'Edit Product' : 'Add Product' }}</h2>
+  <h2 class="mb-4">{{ isEdit() ? 'Edit Product' : 'Add Product' }}</h2>
 
   <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" class="card p-4 shadow-sm dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700">
     <div class="row g-3">
@@ -17,7 +17,7 @@
           required
           minlength="3"
         />
-        @if (submitted && title.invalid) {
+        @if (submitted() && title.invalid) {
           <div class="text-danger small mt-1">
             @if (title.errors?.['required']) { Title is required. }
             @if (title.errors?.['minlength']) { At least 3 characters. }
@@ -36,11 +36,11 @@
           required
         >
           <option value="" disabled>Select category</option>
-          @for (c of categories; track c) {
+          @for (c of categories(); track c) {
             <option [value]="c">{{ c }}</option>
           }
         </select>
-        @if (submitted && category.invalid) {
+        @if (submitted() && category.invalid) {
           <div class="text-danger small mt-1">Category is required.</div>
         }
       </div>
@@ -68,7 +68,7 @@
           required
           min="0"
         />
-        @if (submitted && price.invalid) {
+        @if (submitted() && price.invalid) {
           <div class="text-danger small mt-1">
             @if (price.errors?.['required']) { Price is required. }
             @if (price.errors?.['min']) { Must be 0 or more. }
@@ -88,7 +88,7 @@
           required
           min="0"
         />
-        @if (submitted && stock.invalid) {
+        @if (submitted() && stock.invalid) {
           <div class="text-danger small mt-1">
             @if (stock.errors?.['required']) { Stock is required. }
             @if (stock.errors?.['min']) { Must be 0 or more. }
@@ -105,7 +105,7 @@
           [(ngModel)]="model.brand"
         >
           <option value="">None</option>
-          @for (b of brands; track b) {
+          @for (b of brands(); track b) {
             <option [value]="b">{{ b }}</option>
           }
         </select>
@@ -124,7 +124,7 @@
     </div>
 
     <div class="mt-4">
-      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update Product' : 'Add Product' }}</button>
+      <button type="submit" class="btn btn-primary">{{ isEdit() ? 'Update Product' : 'Add Product' }}</button>
     </div>
   </form>
 </div>

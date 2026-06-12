@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { Product } from '../../models/products-data';
@@ -7,25 +7,23 @@ import { ImageZoomDirective } from '../../directives/image-zoom.directive';
 
 @Component({
   selector: 'app-product-card',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ShortDescriptionPipe, ImageZoomDirective, DecimalPipe, RouterLink],
   templateUrl: './product-card.html',
 })
 export class ProductCard {
-  @Input() product!: Product;
-  @Input() isSelected: boolean = false;
-  @Input() isBought: boolean = false;
+  @Input({ required: true }) product!: Product;
+  @Input() isSelected = false;
+  @Input() isBought = false;
 
   @Output() select = new EventEmitter<number>();
   @Output() buy = new EventEmitter<Product>();
   @Output() delete = new EventEmitter<number>();
 
-  showFull: boolean = false;
-
-  private cdr = inject(ChangeDetectorRef);
+  showFull = signal(false);
 
   toggleDescription(): void {
-    this.showFull = !this.showFull;
-    this.cdr.detectChanges();
+    this.showFull.update((v) => !v);
   }
 
   onSelect(): void {
